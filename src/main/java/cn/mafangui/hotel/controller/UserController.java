@@ -16,7 +16,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
     /**
      * 更新资料
      * @param userName
