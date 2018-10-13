@@ -17,6 +17,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 更新资料
+     * @param userName
+     * @param password
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param idNumber
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/updateProfile")
     public int updateProfile(String userName, String password, String name,
                               String phone, String email, String address, String idNumber){
