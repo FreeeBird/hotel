@@ -64,12 +64,8 @@
       <if test="idNumber != null">
         id_number,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
-      <if test="updateTime != null">
         update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -96,12 +92,8 @@
       <if test="idNumber != null">
         #{idNumber,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        now(),
+        now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.User">
@@ -186,12 +178,7 @@
       <if test="idNumber != null">
         id_number = #{idNumber,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
     </set>
     where user_name = #{userName,jdbcType=INTEGER}
   </update>

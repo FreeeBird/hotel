@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int register(User user) {
-        return userMapper.insert(user);
+        return userMapper.insertSelective(user);
     }
 
     @Override
@@ -39,4 +39,6 @@ public class UserServiceImpl implements UserService {
     public int updateProfile(User user) {
         return userMapper.updateByUserNameSelective(user);
     }
+
+
 }
