@@ -17,11 +17,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/getUser")
-    public User getUser(int id){
-        return userService.selectById(id);
+    @RequestMapping(method = RequestMethod.POST,value = "/updateProfile")
+    public int updateProfile(String userName, String password, String name,
+                              String phone, String email, String address, String idNumber){
+        User user = new User(userName,password,name,phone,email,address,idNumber);
+        return userService.updateProfile(user);
     }
-
     /**
      * 注册
      * @param userName
@@ -39,7 +40,6 @@ public class UserController {
         User user = new User(userName,password,name,phone,email,address,idNumber);
         return userService.register(user);
     }
-
     /**
      * 登录
      * @param userName
@@ -52,6 +52,15 @@ public class UserController {
             return -1;
         }
         return 1;
+    }
+    /**
+     * 查看用户资料
+     * @param userName
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, value = "/getProfile")
+    public User getProfile(String userName){
+        return userService.selectByUserName(userName);
     }
 
 }

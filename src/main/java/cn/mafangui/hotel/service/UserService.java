@@ -10,4 +10,8 @@ public interface UserService {
     int register(User user);
 
     User login(String userName, String password);
+
+    User selectByUserName(String userName);
+
+    int updateProfile(User user);
 }
