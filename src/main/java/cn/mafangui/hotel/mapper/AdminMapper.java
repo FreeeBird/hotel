@@ -15,7 +15,7 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
     int updateByPrimaryKey(Admin record);
     Admin selectByUserName(String userName);
-    Admin selectByUserNameAndPassword(Admin admin);
+    Admin selectByUserNameAndPassword(Admin record);
     int updateByUserNameSelective(Admin record);
     List<Admin> findAll();
 }

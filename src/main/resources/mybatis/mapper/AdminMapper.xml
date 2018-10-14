@@ -86,7 +86,7 @@
     select * from admin
     where user_name = #{userName,jdbcType=VARCHAR}
   </select>
-  <select id="selectByUserNameAndPassword" parameterType="cn.mafangui.hotel.entity.Admin">
+  <select id="selectByUserNameAndPassword" parameterType="cn.mafangui.hotel.entity.Admin" resultMap="BaseResultMap">
     select * from admin
     where user_name = #{userName,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>

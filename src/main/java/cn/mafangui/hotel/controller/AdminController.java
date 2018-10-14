@@ -23,7 +23,7 @@ public class AdminController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public int Login(String userName, String password){
+    public int login(String userName, String password){
         Admin admin = new Admin();
         admin.setUserName(userName);
         admin.setPassword(password);
@@ -47,6 +47,12 @@ public class AdminController {
         return adminService.register(admin);
     }
 
+    /**
+     * 更新资料
+     * @param userName
+     * @param password
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/updateProfile")
     public int updateProfile(String userName, String password){
         Admin admin = new Admin();
