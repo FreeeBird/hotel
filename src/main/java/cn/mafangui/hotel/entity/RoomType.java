@@ -10,9 +10,9 @@ public class RoomType {
 
     private String typeName;
 
-    private BigDecimal bookingPrice;
+    private Double bookingPrice;
 
-    private Float bookingDiscount;
+    private Double bookingDiscount;
 
     private Date createTime;
 
@@ -42,19 +42,19 @@ public class RoomType {
         this.typeName = typeName == null ? null : typeName.trim();
     }
 
-    public BigDecimal getBookingPrice() {
+    public Double getBookingPrice() {
         return bookingPrice;
     }
 
-    public void setBookingPrice(BigDecimal bookingPrice) {
+    public void setBookingPrice(Double bookingPrice) {
         this.bookingPrice = bookingPrice;
     }
 
-    public Float getBookingDiscount() {
+    public Double getBookingDiscount() {
         return bookingDiscount;
     }
 
-    public void setBookingDiscount(Float bookingDiscount) {
+    public void setBookingDiscount(Double bookingDiscount) {
         this.bookingDiscount = bookingDiscount;
     }
 
@@ -72,5 +72,26 @@ public class RoomType {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public RoomType(Integer roomType, String typeName, Double bookingPrice, Double bookingDiscount) {
+        this.roomType = roomType;
+        this.typeName = typeName;
+        this.bookingPrice = bookingPrice;
+        this.bookingDiscount = bookingDiscount;
+    }
+    public RoomType(){}
+
+    @Override
+    public String toString() {
+        return "RoomType{" +
+                "typeId=" + typeId +
+                ", roomType=" + roomType +
+                ", typeName='" + typeName + '\'' +
+                ", bookingPrice=" + bookingPrice +
+                ", bookingDiscount=" + bookingDiscount +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }
