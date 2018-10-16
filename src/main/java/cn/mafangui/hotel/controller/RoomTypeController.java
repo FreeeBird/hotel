@@ -20,7 +20,7 @@ public class RoomTypeController {
     }
 
     public int delType(int roomType,String typeName){
-
+        return 0;
     }
 
 }
