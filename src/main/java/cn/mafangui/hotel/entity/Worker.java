@@ -92,4 +92,36 @@ public class Worker {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public Worker() {
+    }
+
+    public Worker(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
+    public Worker(String userName, String password, String workerName, String phone, String email, String address) {
+        this.userName = userName;
+        this.password = password;
+        this.workerName = workerName;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Worker{" +
+                "workerId=" + workerId +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", workerName='" + workerName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }
