@@ -17,7 +17,7 @@ public class AdminController {
     private AdminService adminService;
 
     /**
-     * 登录
+     * 管理员登录
      * @param userName
      * @param password
      * @return
@@ -34,7 +34,7 @@ public class AdminController {
     }
 
     /**
-     * 注册
+     * 管理员注册
      * @param userName
      * @param password
      * @return

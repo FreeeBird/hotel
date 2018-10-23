@@ -12,9 +12,11 @@ public class Room {
 
     private Integer roomType;
 
-    private BigDecimal roomPrice;
+    private String typeName;
 
-    private Float roomDiscount;
+    private Double roomPrice;
+
+    private Double roomDiscount;
 
     private String roomStatus;
 
@@ -54,19 +56,27 @@ public class Room {
         this.roomType = roomType;
     }
 
-    public BigDecimal getRoomPrice() {
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public Double getRoomPrice() {
         return roomPrice;
     }
 
-    public void setRoomPrice(BigDecimal roomPrice) {
+    public void setRoomPrice(Double roomPrice) {
         this.roomPrice = roomPrice;
     }
 
-    public Float getRoomDiscount() {
+    public Double getRoomDiscount() {
         return roomDiscount;
     }
 
-    public void setRoomDiscount(Float roomDiscount) {
+    public void setRoomDiscount(Double roomDiscount) {
         this.roomDiscount = roomDiscount;
     }
 
@@ -92,5 +102,34 @@ public class Room {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Room() {
+    }
+
+    public Room(String roomNumber, Integer roomFloor, Integer roomType, String typeName, Double roomPrice, Double roomDiscount, String roomStatus) {
+        this.roomNumber = roomNumber;
+        this.roomFloor = roomFloor;
+        this.roomType = roomType;
+        this.typeName = typeName;
+        this.roomPrice = roomPrice;
+        this.roomDiscount = roomDiscount;
+        this.roomStatus = roomStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomId=" + roomId +
+                ", roomNumber='" + roomNumber + '\'' +
+                ", roomFloor=" + roomFloor +
+                ", roomType=" + roomType +
+                ", typeName='" + typeName + '\'' +
+                ", roomPrice=" + roomPrice +
+                ", roomDiscount=" + roomDiscount +
+                ", roomStatus='" + roomStatus + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

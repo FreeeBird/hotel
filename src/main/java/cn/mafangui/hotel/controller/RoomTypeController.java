@@ -16,12 +16,26 @@ public class RoomTypeController {
     @Autowired
     private RoomTypeService roomTypeService;
 
+    /**
+     * 添加房间类型
+     * @param roomType
+     * @param typeName
+     * @param bookingPrice
+     * @param bookingDiscount
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/add")
     public int addNewType(int roomType,String typeName,double bookingPrice,double bookingDiscount){
         RoomType rt = new RoomType(roomType,typeName,bookingPrice,bookingDiscount);
         return roomTypeService.addRoomType(rt);
     }
 
+    /**
+     * 删除房间类型
+     * @param roomType
+     * @param typeName
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/del")
     public int delType(int roomType,String typeName){
         RoomType rt = new RoomType();
@@ -30,12 +44,25 @@ public class RoomTypeController {
         return roomTypeService.delRoomType(rt);
     }
 
+    /**
+     * 更改房间类型
+     * @param roomType
+     * @param typeName
+     * @param bookingPrice
+     * @param bookingDiscount
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/update")
     public int updateType(int roomType,String typeName,double bookingPrice,double bookingDiscount){
         RoomType rt = new RoomType(roomType,typeName,bookingPrice,bookingDiscount);
         return roomTypeService.updateRoomType(rt);
     }
 
+    /**
+     * 查询房间类型
+     * @param roomType
+     * @return
+     */
     @RequestMapping(value = "/query")
     public RoomType findByRoomType(int roomType){
         RoomType rt = new RoomType();
@@ -43,6 +70,10 @@ public class RoomTypeController {
         return roomTypeService.selectByName(rt);
     }
 
+    /**
+     * 查询所有房间类型
+     * @return
+     */
     @RequestMapping(value = "/all")
     public List<RoomType> findAllRoomType(){
         return roomTypeService.findAllType();
