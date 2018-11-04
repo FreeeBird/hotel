@@ -9,5 +9,6 @@ public interface AdminService {
     int register(Admin admin);
     Admin selectByUserName(String userName);
     int updateProfile(Admin admin);
+    int updatePassword(Admin admin,String newPassword);
     List<Admin> findAll();
 }

@@ -12,4 +12,6 @@ public interface WorkerService {
     Worker selectWorker(String userName);
     List<Worker> findAllWorker();
     Worker login(Worker worker);
+    int logout(Worker worker);
+
 }

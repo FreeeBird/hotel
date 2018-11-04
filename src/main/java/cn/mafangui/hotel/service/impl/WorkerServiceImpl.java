@@ -43,4 +43,9 @@ public class WorkerServiceImpl implements WorkerService {
     public Worker login(Worker worker) {
         return workerMapper.selectByUserNameAndPassword(worker);
     }
+
+    @Override
+    public int logout(Worker worker) {
+        return 0;
+    }
 }
