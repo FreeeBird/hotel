@@ -1,6 +1,7 @@
 package cn.mafangui.hotel.utils;
 
 public class finalString {
-    private final String CODE = "code";
-    private final String DATA = "data";
+    public static final String CODE = "code";
+    public static final String DATA = "data";
+
 }
