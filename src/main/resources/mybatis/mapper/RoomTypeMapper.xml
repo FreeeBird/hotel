@@ -8,7 +8,7 @@
     <result column="booking_price" jdbcType="DOUBLE" property="bookingPrice" />
     <result column="booking_discount" jdbcType="DOUBLE" property="bookingDiscount" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_time" jdbcType="DATE" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
     type_id, room_type, type_name, booking_price, booking_discount, create_time, update_time
@@ -90,12 +90,7 @@
       <if test="bookingDiscount != null">
         booking_discount = #{bookingDiscount,jdbcType=REAL},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
     </set>
     where type_id = #{typeId,jdbcType=INTEGER}
   </update>

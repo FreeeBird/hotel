@@ -1,6 +1,10 @@
 package cn.mafangui.hotel.entity;
 
-import java.math.BigDecimal;
+
+import cn.mafangui.hotel.utils.MyDateTimeFormat;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RoomType {
@@ -14,9 +18,12 @@ public class RoomType {
 
     private Double bookingDiscount;
 
+    private String remark;
+
     private Date createTime;
 
     private Date updateTime;
+
 
     public Integer getTypeId() {
         return typeId;
@@ -71,14 +78,23 @@ public class RoomType {
     }
 
     public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+            this.updateTime = updateTime;
     }
 
-    public RoomType(Integer roomType, String typeName, Double bookingPrice, Double bookingDiscount) {
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public RoomType(Integer roomType, String typeName, Double bookingPrice, Double bookingDiscount,String remark) {
         this.roomType = roomType;
         this.typeName = typeName;
         this.bookingPrice = bookingPrice;
         this.bookingDiscount = bookingDiscount;
+        this.remark = remark;
     }
     public RoomType(){}
 
@@ -90,6 +106,7 @@ public class RoomType {
                 ", typeName='" + typeName + '\'' +
                 ", bookingPrice=" + bookingPrice +
                 ", bookingDiscount=" + bookingDiscount +
+                ", remark='" + remark + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';

@@ -10,9 +10,13 @@ public interface RoomTypeService {
 
     int delRoomType(RoomType roomType);
 
+    int delById(int typeId);
+
     int updateRoomType(RoomType roomType);
 
     RoomType selectByName(RoomType roomType);
+
+    RoomType selectById(int typeId);
 
     List<RoomType> findAllType();
 }

@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.awt.print.PrinterException;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "room")
+@RequestMapping(value = "roomInfo")
 public class RoomController {
 
     @Autowired
@@ -91,12 +92,11 @@ public class RoomController {
      * @return
      */
     @RequestMapping(value = "/all")
-    public List<Room> allRoom(){
-        try {
-            return roomService.findAll();
-        }catch (Exception e){
-            return null;
-        }
+    public HashMap allRoom(){
+        HashMap result = new HashMap();
+        result.put("data",roomService.findAll());
+        result.put("code",20000);
+        return result;
     }
 
     /**

@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/worker")
 public class WorkerController {
+    private final String CODE = "code";
+    private final String DATA = "data";
     @Autowired
     private WorkerService workerService;
 
@@ -87,8 +91,11 @@ public class WorkerController {
      * @return
      */
     @RequestMapping(value = "/all")
-    public List<Worker> findAllWorkers(){
-        return workerService.findAllWorker();
+    public HashMap findAllWorkers(){
+        HashMap result = new HashMap();
+        result.put(CODE,20000);
+        result.put(DATA,workerService.findAllWorker());
+        return result;
     }
 
 }

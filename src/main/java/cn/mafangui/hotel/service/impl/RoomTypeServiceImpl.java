@@ -24,13 +24,23 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     }
 
     @Override
+    public int delById(int typeId) {
+        return roomTypeMapper.deleteByPrimaryKey(typeId);
+    }
+
+    @Override
     public int updateRoomType(RoomType roomType) {
-        return roomTypeMapper.updateByRoomTypeSelective(roomType);
+        return roomTypeMapper.updateByPrimaryKeySelective(roomType);
     }
 
     @Override
     public RoomType selectByName(RoomType roomType) {
         return roomTypeMapper.selectByRoomType(roomType);
+    }
+
+    @Override
+    public RoomType selectById(int typeId) {
+        return roomTypeMapper.selectByPrimaryKey(typeId);
     }
 
     @Override
