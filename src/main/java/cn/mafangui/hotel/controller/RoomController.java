@@ -3,7 +3,7 @@ package cn.mafangui.hotel.controller;
 
 import cn.mafangui.hotel.entity.Room;
 import cn.mafangui.hotel.service.RoomService;
-import cn.mafangui.hotel.utils.finalString;
+import cn.mafangui.hotel.utils.StaticString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,25 +20,26 @@ public class RoomController {
      * 增加房间
      * @param roomNumber
      * @param roomFloor
-     * @param roomType
      * @param typeName
      * @param roomPrice
      * @param roomDiscount
      * @param roomStatus
+     * @param remark
      * @return
      */
     @RequestMapping(value = "/add")
-    public HashMap addRoom(String roomNumber, int roomFloor, int roomType, String typeName, double roomPrice,double roomDiscount,String roomStatus){
+    public HashMap addRoom(String roomNumber, int roomFloor, String typeName,
+                           double roomPrice,double roomDiscount,String roomStatus,String remark){
         HashMap result = new HashMap();
         int data = 0;
-        Room room = new Room(roomNumber,roomFloor,roomType,typeName,roomPrice,roomDiscount,roomStatus);
+        Room room = new Room(roomNumber,roomFloor,typeName,roomPrice,roomDiscount,roomStatus,remark);
         try {
             data = roomService.addRoom(room);
         }catch (Exception e){
             data = -1;
         }
-        result.put(finalString.CODE,20000);
-        result.put(finalString.DATA,data);
+        result.put(StaticString.CODE,20000);
+        result.put(StaticString.DATA,data);
         return result;
     }
 
@@ -61,8 +62,8 @@ public class RoomController {
         }catch (Exception e){
             data = -1;
         }
-        result.put(finalString.CODE,20000);
-        result.put(finalString.DATA,data);
+        result.put(StaticString.CODE,20000);
+        result.put(StaticString.DATA,data);
         return result;
     }
 
@@ -71,26 +72,27 @@ public class RoomController {
      * @param roomId
      * @param roomNumber
      * @param roomFloor
-     * @param roomType
      * @param typeName
      * @param roomPrice
      * @param roomDiscount
      * @param roomStatus
+     * @param remark
      * @return
      */
     @RequestMapping(value = "/update")
-    public HashMap updateRoom(int roomId,String roomNumber, int roomFloor, int roomType, String typeName, double roomPrice,double roomDiscount,String roomStatus){
+    public HashMap updateRoom(int roomId,String roomNumber, int roomFloor, String typeName,
+                              double roomPrice,double roomDiscount,String roomStatus,String remark){
         HashMap result = new HashMap();
         int data = 0;
-        Room room = new Room(roomNumber,roomFloor,roomType,typeName,roomPrice,roomDiscount,roomStatus);
+        Room room = new Room(roomNumber,roomFloor,typeName,roomPrice,roomDiscount,roomStatus,remark);
         room.setRoomId(roomId);
         try {
             data = roomService.updateRoom(room);
         }catch (Exception e){
             data = -1;
         }
-        result.put(finalString.CODE,20000);
-        result.put(finalString.DATA,data);
+        result.put(StaticString.CODE,20000);
+        result.put(StaticString.DATA,data);
         return result;
     }
 
@@ -101,8 +103,8 @@ public class RoomController {
     @RequestMapping(value = "/all")
     public HashMap allRoom(){
         HashMap result = new HashMap();
-        result.put(finalString.DATA,roomService.findAll());
-        result.put(finalString.CODE,20000);
+        result.put(StaticString.DATA,roomService.findAll());
+        result.put(StaticString.CODE,20000);
         return result;
     }
 
@@ -115,11 +117,11 @@ public class RoomController {
     @RequestMapping(value = "/withId")
     public HashMap findRoomById(int roomId){
         HashMap result = new HashMap();
-        result.put(finalString.CODE,20000);
+        result.put(StaticString.CODE,20000);
         try{
-            result.put(finalString.DATA,roomService.findById(roomId));
+            result.put(StaticString.DATA,roomService.findById(roomId));
         }catch (Exception e){
-            result.put(finalString.DATA,-1);
+            result.put(StaticString.DATA,-1);
         }
         return result;
     }
@@ -132,11 +134,11 @@ public class RoomController {
     @RequestMapping(value = "/withRoomNumber")
     public HashMap findRoomByNumber(String roomNumber){
         HashMap result = new HashMap();
-        result.put(finalString.CODE,20000);
+        result.put(StaticString.CODE,20000);
         try{
-            result.put(finalString.DATA,roomService.findByNumber(roomNumber));
+            result.put(StaticString.DATA,roomService.findByNumber(roomNumber));
         }catch (Exception e){
-            result.put(finalString.DATA,-1);
+            result.put(StaticString.DATA,-1);
         }
         return result;
     }
@@ -149,11 +151,11 @@ public class RoomController {
     @RequestMapping(value = "/withStatus")
     public HashMap findRoomByStatus(String roomStatus){
         HashMap result = new HashMap();
-        result.put(finalString.CODE,20000);
+        result.put(StaticString.CODE,20000);
         try{
-            result.put(finalString.DATA,roomService.findByStatus(roomStatus));
+            result.put(StaticString.DATA,roomService.findByStatus(roomStatus));
         }catch (Exception e){
-            result.put(finalString.DATA,-1);
+            result.put(StaticString.DATA,-1);
         }
         return result;
     }
@@ -166,11 +168,11 @@ public class RoomController {
     @RequestMapping(value = "/withType")
     public HashMap findRoomByType(String typeName){
         HashMap result = new HashMap();
-        result.put(finalString.CODE,20000);
+        result.put(StaticString.CODE,20000);
         try{
-            result.put(finalString.DATA,roomService.findByType(typeName));
+            result.put(StaticString.DATA,roomService.findByType(typeName));
         }catch (Exception e){
-            result.put(finalString.DATA,-1);
+            result.put(StaticString.DATA,-1);
         }
         return result;
     }

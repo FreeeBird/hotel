@@ -59,20 +59,23 @@
         <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
             是否生成 example类 -->
 
-        <table schema="hotel" tableName="user"
-               domainObjectName="User" enableCountByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false">
+        <table schema="hotel" tableName="user_info"
+               domainObjectName="User" enableCountByExample="true"
+               enableDeleteByExample="true" enableSelectByExample="true"
+               enableUpdateByExample="true">
         </table>
-
-        <table schema="hotel" tableName="worker"
+        <table schema="hotel" tableName="worker_info"
                domainObjectName="Worker" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>
-
         <table schema="hotel" tableName="room_type"
                domainObjectName="RoomType" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+        </table>
+        <table schema="hotel" tableName="order_type"
+               domainObjectName="OrderType" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>
@@ -91,13 +94,13 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>
-        <table schema="hotel" tableName="check_in"
-               domainObjectName="CheckIn" enableCountByExample="false"
+        <table schema="hotel" tableName="department_info"
+               domainObjectName="Department" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>
-        <table schema="hotel" tableName="admin"
-               domainObjectName="Admin" enableCountByExample="false"
+        <table schema="hotel" tableName="check_in"
+               domainObjectName="CheckIn" enableCountByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                enableUpdateByExample="false">
         </table>

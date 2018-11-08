@@ -43,6 +43,7 @@
     </settings>
     <typeAliases>
         <typeAlias alias="Integer" type="java.lang.Integer" />
+        <typeAlias alias="String" type="java.lang.String" />
         <typeAlias alias="Long" type="java.lang.Long" />
         <typeAlias alias="HashMap" type="java.util.HashMap" />
         <typeAlias alias="LinkedHashMap" type="java.util.LinkedHashMap" />

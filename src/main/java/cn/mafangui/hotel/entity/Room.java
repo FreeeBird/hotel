@@ -1,6 +1,6 @@
 package cn.mafangui.hotel.entity;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 public class Room {
@@ -10,15 +10,15 @@ public class Room {
 
     private Integer roomFloor;
 
-    private Integer roomType;
-
-    private String typeName;
+    private String roomType;
 
     private Double roomPrice;
 
     private Double roomDiscount;
 
     private String roomStatus;
+
+    private String remark;
 
     private Date createTime;
 
@@ -48,20 +48,12 @@ public class Room {
         this.roomFloor = roomFloor;
     }
 
-    public Integer getRoomType() {
+    public String getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(Integer roomType) {
+    public void setRoomType(String roomType) {
         this.roomType = roomType;
-    }
-
-    public String getTypeName() {
-        return typeName;
-    }
-
-    public void setTypeName(String typeName) {
-        this.typeName = typeName;
     }
 
     public Double getRoomPrice() {
@@ -88,6 +80,14 @@ public class Room {
         this.roomStatus = roomStatus == null ? null : roomStatus.trim();
     }
 
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -107,14 +107,14 @@ public class Room {
     public Room() {
     }
 
-    public Room(String roomNumber, Integer roomFloor, Integer roomType, String typeName, Double roomPrice, Double roomDiscount, String roomStatus) {
+    public Room(String roomNumber, Integer roomFloor, String roomType, Double roomPrice, Double roomDiscount, String roomStatus,String remark) {
         this.roomNumber = roomNumber;
         this.roomFloor = roomFloor;
         this.roomType = roomType;
-        this.typeName = typeName;
         this.roomPrice = roomPrice;
         this.roomDiscount = roomDiscount;
         this.roomStatus = roomStatus;
+        this.remark = remark;
     }
 
     @Override
@@ -123,8 +123,7 @@ public class Room {
                 "roomId=" + roomId +
                 ", roomNumber='" + roomNumber + '\'' +
                 ", roomFloor=" + roomFloor +
-                ", roomType=" + roomType +
-                ", typeName='" + typeName + '\'' +
+                ", roomType='" + roomType + '\'' +
                 ", roomPrice=" + roomPrice +
                 ", roomDiscount=" + roomDiscount +
                 ", roomStatus='" + roomStatus + '\'' +
