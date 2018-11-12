@@ -5,11 +5,13 @@ import java.util.Date;
 public class User {
     private Integer userId;
 
-    private String userName;
+    private String username;
 
     private String password;
 
     private String name;
+
+    private String gender;
 
     private String phone;
 
@@ -17,11 +19,25 @@ public class User {
 
     private String address;
 
-    private String idNumber;
+    private String idcard;
 
     private Date createTime;
 
     private Date updateTime;
+
+    public User() {
+    }
+
+    public User(String username, String password, String name, String gender, String phone, String email, String address, String idcard) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.idcard = idcard;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -31,12 +47,12 @@ public class User {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -53,6 +69,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name == null ? null : name.trim();
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
     }
 
     public String getPhone() {
@@ -79,26 +103,16 @@ public class User {
         this.address = address == null ? null : address.trim();
     }
 
-    public String getIdNumber() {
-        return idNumber;
+    public String getIdcard() {
+        return idcard;
     }
 
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber == null ? null : idNumber.trim();
+    public void setIdcard(String idcard) {
+        this.idcard = idcard == null ? null : idcard.trim();
     }
 
     public Date getCreateTime() {
         return createTime;
-    }
-
-    public User(String userName, String password, String name, String phone, String email, String address, String idNumber) {
-        this.userName = userName;
-        this.password = password;
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.idNumber = idNumber;
     }
 
     public void setCreateTime(Date createTime) {
@@ -113,6 +127,20 @@ public class User {
         this.updateTime = updateTime;
     }
 
-    public User() {
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", idcard='" + idcard + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

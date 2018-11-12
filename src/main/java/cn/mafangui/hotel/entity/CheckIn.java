@@ -9,13 +9,13 @@ public class CheckIn {
 
     private String roomNumber;
 
-    private Integer roomType;
+    private String roomType;
 
-    private Integer personNum;
+    private Integer peoCount;
 
-    private String personName;
+    private String persons;
 
-    private String idNumbers;
+    private String ids;
 
     private Date checkInTime;
 
@@ -47,36 +47,36 @@ public class CheckIn {
         this.roomNumber = roomNumber == null ? null : roomNumber.trim();
     }
 
-    public Integer getRoomType() {
+    public String getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(Integer roomType) {
-        this.roomType = roomType;
+    public void setRoomType(String roomType) {
+        this.roomType = roomType == null ? null : roomType.trim();
     }
 
-    public Integer getPersonNum() {
-        return personNum;
+    public Integer getPeoCount() {
+        return peoCount;
     }
 
-    public void setPersonNum(Integer personNum) {
-        this.personNum = personNum;
+    public void setPeoCount(Integer peoCount) {
+        this.peoCount = peoCount;
     }
 
-    public String getPersonName() {
-        return personName;
+    public String getPersons() {
+        return persons;
     }
 
-    public void setPersonName(String personName) {
-        this.personName = personName == null ? null : personName.trim();
+    public void setPersons(String persons) {
+        this.persons = persons == null ? null : persons.trim();
     }
 
-    public String getIdNumbers() {
-        return idNumbers;
+    public String getIds() {
+        return ids;
     }
 
-    public void setIdNumbers(String idNumbers) {
-        this.idNumbers = idNumbers == null ? null : idNumbers.trim();
+    public void setIds(String ids) {
+        this.ids = ids == null ? null : ids.trim();
     }
 
     public Date getCheckInTime() {

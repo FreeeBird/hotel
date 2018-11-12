@@ -3,6 +3,8 @@ package cn.mafangui.hotel.service;
 
 import cn.mafangui.hotel.entity.User;
 
+import java.util.List;
+
 public interface UserService {
 
     User selectById(int id);
@@ -13,5 +15,10 @@ public interface UserService {
 
     User selectByUserName(String userName);
 
+    int count();
+
+    List<User> findAll();
+
     int updateProfile(User user);
+
 }

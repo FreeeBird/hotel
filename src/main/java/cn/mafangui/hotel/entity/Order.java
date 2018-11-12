@@ -1,26 +1,25 @@
 package cn.mafangui.hotel.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 public class Order {
     private Integer orderId;
 
-    private String bookingType;
+    private String orderType;
 
     private String phone;
 
-    private String roomNumber;
+    private String roomType;
 
-    private Integer roomType;
+    private Integer numOfRoom;
 
-    private Date bookingDate;
+    private Date orderDate;
 
-    private Integer bookingDays;
+    private Integer orderDays;
 
     private Integer orderStatus;
 
-    private BigDecimal orderCost;
+    private Double orderCost;
 
     private Date createTime;
 
@@ -34,12 +33,12 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getBookingType() {
-        return bookingType;
+    public String getOrderType() {
+        return orderType;
     }
 
-    public void setBookingType(String bookingType) {
-        this.bookingType = bookingType == null ? null : bookingType.trim();
+    public void setOrderType(String orderType) {
+        this.orderType = orderType == null ? null : orderType.trim();
     }
 
     public String getPhone() {
@@ -50,36 +49,36 @@ public class Order {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(String roomNumber) {
-        this.roomNumber = roomNumber == null ? null : roomNumber.trim();
-    }
-
-    public Integer getRoomType() {
+    public String getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(Integer roomType) {
-        this.roomType = roomType;
+    public void setRoomType(String roomType) {
+        this.roomType = roomType == null ? null : roomType.trim();
     }
 
-    public Date getBookingDate() {
-        return bookingDate;
+    public Integer getNumOfRoom() {
+        return numOfRoom;
     }
 
-    public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;
+    public void setNumOfRoom(Integer numOfRoom) {
+        this.numOfRoom = numOfRoom;
     }
 
-    public Integer getBookingDays() {
-        return bookingDays;
+    public Date getOrderDate() {
+        return orderDate;
     }
 
-    public void setBookingDays(Integer bookingDays) {
-        this.bookingDays = bookingDays;
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public Integer getOrderDays() {
+        return orderDays;
+    }
+
+    public void setOrderDays(Integer orderDays) {
+        this.orderDays = orderDays;
     }
 
     public Integer getOrderStatus() {
@@ -90,11 +89,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    public BigDecimal getOrderCost() {
+    public Double getOrderCost() {
         return orderCost;
     }
 
-    public void setOrderCost(BigDecimal orderCost) {
+    public void setOrderCost(Double orderCost) {
         this.orderCost = orderCost;
     }
 

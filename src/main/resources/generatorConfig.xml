@@ -22,7 +22,7 @@
         <!-- JDBC连接 -->
         <jdbcConnection
                 driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://localhost:3306/hotel?useUnicode=true&amp;characterEncoding=UTF-8"
+                connectionURL="jdbc:mysql://127.0.0.1:3306/hotel?useUnicode=true&amp;characterEncoding=UTF-8"
                 userId="root"
                 password="root">
         </jdbcConnection>
@@ -44,7 +44,7 @@
         </javaModelGenerator>
 
         <!-- 生成mapper xml文件 -->
-        <sqlMapGenerator targetPackage="mybatis/mapper"  targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapper"  targetProject="src/main/resources">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
@@ -60,9 +60,9 @@
             是否生成 example类 -->
 
         <table schema="hotel" tableName="user_info"
-               domainObjectName="User" enableCountByExample="true"
-               enableDeleteByExample="true" enableSelectByExample="true"
-               enableUpdateByExample="true">
+               domainObjectName="User" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
         </table>
         <table schema="hotel" tableName="worker_info"
                domainObjectName="Worker" enableCountByExample="false"

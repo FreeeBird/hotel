@@ -5,13 +5,19 @@ import java.util.Date;
 public class Worker {
     private Integer workerId;
 
-    private String userName;
+    private String role;
+
+    private String username;
 
     private String password;
 
-    private String workerName;
+    private String name;
+
+    private String gender;
 
     private String phone;
+
+    private Integer department;
 
     private String email;
 
@@ -29,12 +35,20 @@ public class Worker {
         this.workerId = workerId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getRole() {
+        return role;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setRole(String role) {
+        this.role = role == null ? null : role.trim();
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -45,12 +59,20 @@ public class Worker {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getWorkerName() {
-        return workerName;
+    public String getName() {
+        return name;
     }
 
-    public void setWorkerName(String workerName) {
-        this.workerName = workerName == null ? null : workerName.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender == null ? null : gender.trim();
     }
 
     public String getPhone() {
@@ -59,6 +81,14 @@ public class Worker {
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Integer getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Integer department) {
+        this.department = department;
     }
 
     public String getEmail() {
@@ -91,37 +121,5 @@ public class Worker {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Worker() {
-    }
-
-    public Worker(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
-
-    public Worker(String userName, String password, String workerName, String phone, String email, String address) {
-        this.userName = userName;
-        this.password = password;
-        this.workerName = workerName;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "Worker{" +
-                "workerId=" + workerId +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", workerName='" + workerName + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", address='" + address + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
     }
 }

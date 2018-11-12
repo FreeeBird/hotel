@@ -1,68 +1,100 @@
 package cn.mafangui.hotel.entity;
 
-
-import cn.mafangui.hotel.utils.MyDateTimeFormat;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RoomType {
-    private Integer typeId;
+    private Long typeId;
 
-    private Integer roomType;
-
-    private String typeName;
-
-    private Double bookingPrice;
-
-    private Double bookingDiscount;
+    private String roomType;
 
     private String remark;
+
+    private Double price;
+
+    private Double discount;
+
+    private Integer area;
+
+    private Integer bedNum;
+
+    private String bedSize;
+
+    private Integer window;
 
     private Date createTime;
 
     private Date updateTime;
 
-
-    public Integer getTypeId() {
+    public Long getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(Integer typeId) {
+    public void setTypeId(Long typeId) {
         this.typeId = typeId;
     }
 
-    public Integer getRoomType() {
+    public String getRoomType() {
         return roomType;
     }
 
-    public void setRoomType(Integer roomType) {
-        this.roomType = roomType;
+    public void setRoomType(String roomType) {
+        this.roomType = roomType == null ? null : roomType.trim();
     }
 
-    public String getTypeName() {
-        return typeName;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setTypeName(String typeName) {
-        this.typeName = typeName == null ? null : typeName.trim();
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
-    public Double getBookingPrice() {
-        return bookingPrice;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setBookingPrice(Double bookingPrice) {
-        this.bookingPrice = bookingPrice;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
-    public Double getBookingDiscount() {
-        return bookingDiscount;
+    public Double getDiscount() {
+        return discount;
     }
 
-    public void setBookingDiscount(Double bookingDiscount) {
-        this.bookingDiscount = bookingDiscount;
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public Integer getArea() {
+        return area;
+    }
+
+    public void setArea(Integer area) {
+        this.area = area;
+    }
+
+    public Integer getBedNum() {
+        return bedNum;
+    }
+
+    public void setBedNum(Integer bedNum) {
+        this.bedNum = bedNum;
+    }
+
+    public String getBedSize() {
+        return bedSize;
+    }
+
+    public void setBedSize(String bedSize) {
+        this.bedSize = bedSize == null ? null : bedSize.trim();
+    }
+
+    public Integer getWindow() {
+        return window;
+    }
+
+    public void setWindow(Integer window) {
+        this.window = window;
     }
 
     public Date getCreateTime() {
@@ -78,37 +110,6 @@ public class RoomType {
     }
 
     public void setUpdateTime(Date updateTime) {
-            this.updateTime = updateTime;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public RoomType(Integer roomType, String typeName, Double bookingPrice, Double bookingDiscount,String remark) {
-        this.roomType = roomType;
-        this.typeName = typeName;
-        this.bookingPrice = bookingPrice;
-        this.bookingDiscount = bookingDiscount;
-        this.remark = remark;
-    }
-    public RoomType(){}
-
-    @Override
-    public String toString() {
-        return "RoomType{" +
-                "typeId=" + typeId +
-                ", roomType=" + roomType +
-                ", typeName='" + typeName + '\'' +
-                ", bookingPrice=" + bookingPrice +
-                ", bookingDiscount=" + bookingDiscount +
-                ", remark='" + remark + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+        this.updateTime = updateTime;
     }
 }

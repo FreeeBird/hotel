@@ -1,6 +1,5 @@
 package cn.mafangui.hotel.entity;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 public class Room {
@@ -8,7 +7,7 @@ public class Room {
 
     private String roomNumber;
 
-    private Integer roomFloor;
+    private Integer typeId;
 
     private String roomType;
 
@@ -16,7 +15,7 @@ public class Room {
 
     private Double roomDiscount;
 
-    private String roomStatus;
+    private Integer roomStatus;
 
     private String remark;
 
@@ -40,12 +39,12 @@ public class Room {
         this.roomNumber = roomNumber == null ? null : roomNumber.trim();
     }
 
-    public Integer getRoomFloor() {
-        return roomFloor;
+    public Integer getTypeId() {
+        return typeId;
     }
 
-    public void setRoomFloor(Integer roomFloor) {
-        this.roomFloor = roomFloor;
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
     }
 
     public String getRoomType() {
@@ -53,7 +52,7 @@ public class Room {
     }
 
     public void setRoomType(String roomType) {
-        this.roomType = roomType;
+        this.roomType = roomType == null ? null : roomType.trim();
     }
 
     public Double getRoomPrice() {
@@ -72,12 +71,12 @@ public class Room {
         this.roomDiscount = roomDiscount;
     }
 
-    public String getRoomStatus() {
+    public Integer getRoomStatus() {
         return roomStatus;
     }
 
-    public void setRoomStatus(String roomStatus) {
-        this.roomStatus = roomStatus == null ? null : roomStatus.trim();
+    public void setRoomStatus(Integer roomStatus) {
+        this.roomStatus = roomStatus;
     }
 
     public String getRemark() {
@@ -85,7 +84,7 @@ public class Room {
     }
 
     public void setRemark(String remark) {
-        this.remark = remark;
+        this.remark = remark == null ? null : remark.trim();
     }
 
     public Date getCreateTime() {
@@ -102,33 +101,5 @@ public class Room {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    public Room() {
-    }
-
-    public Room(String roomNumber, Integer roomFloor, String roomType, Double roomPrice, Double roomDiscount, String roomStatus,String remark) {
-        this.roomNumber = roomNumber;
-        this.roomFloor = roomFloor;
-        this.roomType = roomType;
-        this.roomPrice = roomPrice;
-        this.roomDiscount = roomDiscount;
-        this.roomStatus = roomStatus;
-        this.remark = remark;
-    }
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "roomId=" + roomId +
-                ", roomNumber='" + roomNumber + '\'' +
-                ", roomFloor=" + roomFloor +
-                ", roomType='" + roomType + '\'' +
-                ", roomPrice=" + roomPrice +
-                ", roomDiscount=" + roomDiscount +
-                ", roomStatus='" + roomStatus + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
     }
 }
