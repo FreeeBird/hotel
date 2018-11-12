@@ -6,13 +6,11 @@ import java.util.List;
 
 
 public interface RoomService {
-    int addRoom(Room room);
-    int deleteRoom(int roomId);
-    int deleteRoom(String roomNumber);
-    int updateRoom(Room room);
-    Room findById(int roomId);
-    Room findByNumber(String roomNumber);
-    List<Room> findByStatus(String status);
-    List<Room> findByType(String typeName);
-    List<Room> findAll();
+    int insert(Room room);
+    int delete(int roomId);
+    int update(Room room);
+    Room selectById(int roomId);
+    List<Room> selectByStatus(int roomStatus);
+    List<Room> selectByType(int typeId);
+    List<Room> selectAll();
 }

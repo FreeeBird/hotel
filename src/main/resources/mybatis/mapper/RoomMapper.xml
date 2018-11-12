@@ -23,6 +23,17 @@
     from room_info
     where room_id = #{roomId,jdbcType=INTEGER}
   </select>
+  <select id="selectByType" parameterType="Integer" resultMap="BaseResultMap">
+    select * from room_info
+    where type_id = #{typeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByStatus" parameterType="Integer" resultMap="BaseResultMap">
+    select * from room_info
+    where room_status = #{roomStatus,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from room_info
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from room_info
     where room_id = #{roomId,jdbcType=INTEGER}
@@ -34,8 +45,8 @@
       update_time)
     values (#{roomId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
       #{roomType,jdbcType=VARCHAR}, #{roomPrice,jdbcType=DOUBLE}, #{roomDiscount,jdbcType=DOUBLE}, 
-      #{roomStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{roomStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, now(),
+      now())
   </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.Room">
     insert into room_info
@@ -64,12 +75,8 @@
       <if test="remark != null">
         remark,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
-      <if test="updateTime != null">
         update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="roomId != null">
@@ -96,12 +103,8 @@
       <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
+      now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.Room">
@@ -128,12 +131,7 @@
       <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
     </set>
     where room_id = #{roomId,jdbcType=INTEGER}
   </update>
@@ -146,8 +144,7 @@
       room_discount = #{roomDiscount,jdbcType=DOUBLE},
       room_status = #{roomStatus,jdbcType=INTEGER},
       remark = #{remark,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where room_id = #{roomId,jdbcType=INTEGER}
   </update>
 </mapper>
