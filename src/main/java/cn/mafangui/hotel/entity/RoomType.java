@@ -3,7 +3,7 @@ package cn.mafangui.hotel.entity;
 import java.util.Date;
 
 public class RoomType {
-    private Long typeId;
+    private Integer typeId;
 
     private String roomType;
 
@@ -25,11 +25,11 @@ public class RoomType {
 
     private Date updateTime;
 
-    public Long getTypeId() {
+    public Integer getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(Long typeId) {
+    public void setTypeId(Integer typeId) {
         this.typeId = typeId;
     }
 
@@ -111,5 +111,22 @@ public class RoomType {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "RoomType{" +
+                "typeId=" + typeId +
+                ", roomType='" + roomType + '\'' +
+                ", remark='" + remark + '\'' +
+                ", price=" + price +
+                ", discount=" + discount +
+                ", area=" + area +
+                ", bedNum=" + bedNum +
+                ", bedSize='" + bedSize + '\'' +
+                ", window=" + window +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

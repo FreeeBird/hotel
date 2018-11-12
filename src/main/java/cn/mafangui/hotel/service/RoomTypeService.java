@@ -1,20 +1,20 @@
 package cn.mafangui.hotel.service;
 
 import cn.mafangui.hotel.entity.RoomType;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface RoomTypeService {
 
-    int addRoomType(RoomType roomType);
+    int insert(RoomType roomType);
 
-    int delRoomType(RoomType roomType);
+    int delete(int typeId);
 
-    int delById(int typeId);
+    int update(RoomType roomType);
 
-    int updateRoomType(RoomType roomType);
-
-    RoomType selectByName(RoomType roomType);
+    RoomType selectByName(String roomType);
 
     RoomType selectById(int typeId);
 

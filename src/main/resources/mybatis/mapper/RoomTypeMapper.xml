@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.mafangui.hotel.mapper.RoomTypeMapper">
   <resultMap id="BaseResultMap" type="cn.mafangui.hotel.entity.RoomType">
-    <id column="type_id" jdbcType="BIGINT" property="typeId" />
+    <id column="type_id" jdbcType="INTEGER" property="typeId" />
     <result column="room_type" jdbcType="VARCHAR" property="roomType" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="price" jdbcType="DOUBLE" property="price" />
@@ -18,25 +18,31 @@
     type_id, room_type, remark, price, discount, area, bed_num, bed_size, window, create_time, 
     update_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from room_type
-    where type_id = #{typeId,jdbcType=BIGINT}
+    where type_id = #{typeId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from room_type
+  </select>
+  <select id="selectByRoomType" parameterType="String" resultMap="BaseResultMap">
+    select * from room_type where room_type = #{roomType,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from room_type
-    where type_id = #{typeId,jdbcType=BIGINT}
+    where type_id = #{typeId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.mafangui.hotel.entity.RoomType">
     insert into room_type (type_id, room_type, remark, 
       price, discount, area, 
       bed_num, bed_size, window, 
       create_time, update_time)
-    values (#{typeId,jdbcType=BIGINT}, #{roomType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+    values (#{typeId,jdbcType=INTEGER}, #{roomType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
       #{price,jdbcType=DOUBLE}, #{discount,jdbcType=DOUBLE}, #{area,jdbcType=INTEGER}, 
       #{bedNum,jdbcType=INTEGER}, #{bedSize,jdbcType=VARCHAR}, #{window,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.RoomType">
     insert into room_type
@@ -68,16 +74,12 @@
       <if test="window != null">
         window,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
-      <if test="updateTime != null">
         update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="typeId != null">
-        #{typeId,jdbcType=BIGINT},
+        #{typeId,jdbcType=INTEGER},
       </if>
       <if test="roomType != null">
         #{roomType,jdbcType=VARCHAR},
@@ -103,12 +105,8 @@
       <if test="window != null">
         #{window,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
+      now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.RoomType">
@@ -138,14 +136,9 @@
       <if test="window != null">
         window = #{window,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
     </set>
-    where type_id = #{typeId,jdbcType=BIGINT}
+    where type_id = #{typeId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.mafangui.hotel.entity.RoomType">
     update room_type
@@ -157,8 +150,7 @@
       bed_num = #{bedNum,jdbcType=INTEGER},
       bed_size = #{bedSize,jdbcType=VARCHAR},
       window = #{window,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
-    where type_id = #{typeId,jdbcType=BIGINT}
+      update_time = now()
+    where type_id = #{typeId,jdbcType=INTEGER}
   </update>
 </mapper>
