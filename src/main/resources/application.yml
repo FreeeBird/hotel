@@ -10,5 +10,5 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/hotel?useUnicode=true&characterEncoding=UTF-8
 mybatis:
   type-aliases-package: classpath*:cn.mafangui.hotel.entity
-  mapper-locations: classpath*:mapper/*.xml
+  mapper-locations: classpath*:mybatis/mapper/*.xml
 

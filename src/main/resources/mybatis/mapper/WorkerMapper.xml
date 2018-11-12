@@ -3,53 +3,81 @@
 <mapper namespace="cn.mafangui.hotel.mapper.WorkerMapper">
   <resultMap id="BaseResultMap" type="cn.mafangui.hotel.entity.Worker">
     <id column="worker_id" jdbcType="INTEGER" property="workerId" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="worker_name" jdbcType="VARCHAR" property="workerName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="gender" jdbcType="CHAR" property="gender" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="department" jdbcType="INTEGER" property="department" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    worker_id, user_name, password, worker_name, phone, email, address, create_time, 
-    update_time
+    worker_id, role, username, password, name, gender, phone, department, email, address, 
+    create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from worker
+    from worker_info
     where worker_id = #{workerId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUsernameAndPassword" parameterType="String" resultMap="BaseResultMap">
+    select * from worker_info
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByRole" parameterType="String" resultMap="BaseResultMap">
+    select * from worker_info
+    where role = #{role,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from worker_info
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from worker
+    delete from worker_info
     where worker_id = #{workerId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.mafangui.hotel.entity.Worker">
-    insert into worker (worker_id, user_name, password,
-      worker_name, phone, email, 
+    insert into worker_info (worker_id, role, username, 
+      password, name, gender, 
+      phone, department, email, 
       address, create_time, update_time
       )
-    values (#{workerId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-      #{workerName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+    values (#{workerId,jdbcType=INTEGER}, #{role,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{department,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, now(),now()
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.Worker">
-    insert into worker
+    insert into worker_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="userName != null">
-        user_name,
+      <if test="workerId != null">
+        worker_id,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+      <if test="username != null">
+        username,
       </if>
       <if test="password != null">
         password,
       </if>
-      <if test="workerName != null">
-        worker_name,
+      <if test="name != null">
+        name,
+      </if>
+      <if test="gender != null">
+        gender,
       </if>
       <if test="phone != null">
         phone,
+      </if>
+      <if test="department != null">
+        department,
       </if>
       <if test="email != null">
         email,
@@ -61,17 +89,29 @@
         update_time,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
+      <if test="workerId != null">
+        #{workerId,jdbcType=INTEGER},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="workerName != null">
-        #{workerName,jdbcType=VARCHAR},
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=CHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=INTEGER},
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
@@ -79,24 +119,33 @@
       <if test="address != null">
         #{address,jdbcType=VARCHAR},
       </if>
-        now(),
-        now(),
+      now(),
+      now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.Worker">
-    update worker
+    update worker_info
     <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="workerName != null">
-        worker_name = #{workerName,jdbcType=VARCHAR},
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=CHAR},
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        department = #{department,jdbcType=INTEGER},
       </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
@@ -104,61 +153,21 @@
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where worker_id = #{workerId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.mafangui.hotel.entity.Worker">
-    update worker
-    set user_name = #{userName,jdbcType=VARCHAR},
+    update worker_info
+    set role = #{role,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      worker_name = #{workerName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
       phone = #{phone,jdbcType=VARCHAR},
+      department = #{department,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where worker_id = #{workerId,jdbcType=INTEGER}
   </update>
-  <delete id="deleteByUserName" parameterType="String">
-    delete from worker
-    where user_name = #{userName,jdbcType=VARCHAR}
-  </delete>
-  <update id="updateByUserNameSelective">
-    update worker
-    set
-    <if test="password != null">
-    password = #{password,jdbcType=VARCHAR},
-    </if>
-    <if test="workerName != null">
-      worker_name = #{workerName,jdbcType=VARCHAR},
-    </if>
-    <if test="phone != null">
-      phone = #{phone,jdbcType=VARCHAR},
-    </if>
-    <if test="email != null">
-      email = #{email,jdbcType=VARCHAR},
-    </if>
-    <if test="address != null">
-      address = #{address,jdbcType=VARCHAR},
-    </if>
-      update_time = now()
-    where user_name = #{userName,jdbcType=VARCHAR}
-  </update>
-  <select id="selectByUserName" parameterType="String" resultMap="BaseResultMap">
-    select * from worker
-    where user_name = #{userName,jdbcType=VARCHAR}
-  </select>
-  <select id="findAll" resultMap="BaseResultMap">
-    select * from worker
-  </select>
-  <select id="selectByUserNameAndPassword" resultMap="BaseResultMap">
-    select * from worker
-    where user_name = #{userName,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
-  </select>
+
 </mapper>

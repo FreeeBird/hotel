@@ -15,10 +15,10 @@ public interface UserService {
 
     User selectByUserName(String userName);
 
-    int count();
-
-    List<User> findAll();
-
-    int updateProfile(User user);
+//    int count();
+//
+//    List<User> findAll();
+//
+//    int updateProfile(User user);
 
 }

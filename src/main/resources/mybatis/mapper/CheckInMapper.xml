@@ -5,17 +5,17 @@
     <id column="check_in_id" jdbcType="INTEGER" property="checkInId" />
     <result column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="room_number" jdbcType="VARCHAR" property="roomNumber" />
-    <result column="room_type" jdbcType="INTEGER" property="roomType" />
-    <result column="person_num" jdbcType="INTEGER" property="personNum" />
-    <result column="person_name" jdbcType="VARCHAR" property="personName" />
-    <result column="id_numbers" jdbcType="VARCHAR" property="idNumbers" />
+    <result column="room_type" jdbcType="VARCHAR" property="roomType" />
+    <result column="peo_count" jdbcType="INTEGER" property="peoCount" />
+    <result column="persons" jdbcType="VARCHAR" property="persons" />
+    <result column="ids" jdbcType="VARCHAR" property="ids" />
     <result column="check_in_time" jdbcType="TIMESTAMP" property="checkInTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    check_in_id, order_id, room_number, room_type, person_num, person_name, id_numbers, 
-    check_in_time, create_time, update_time
+    check_in_id, order_id, room_number, room_type, peo_count, persons, ids, check_in_time, 
+    create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -29,12 +29,12 @@
   </delete>
   <insert id="insert" parameterType="cn.mafangui.hotel.entity.CheckIn">
     insert into check_in (check_in_id, order_id, room_number, 
-      room_type, person_num, person_name, 
-      id_numbers, check_in_time, create_time, 
+      room_type, peo_count, persons, 
+      ids, check_in_time, create_time, 
       update_time)
     values (#{checkInId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR}, 
-      #{roomType,jdbcType=INTEGER}, #{personNum,jdbcType=INTEGER}, #{personName,jdbcType=VARCHAR}, 
-      #{idNumbers,jdbcType=VARCHAR}, #{checkInTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{roomType,jdbcType=VARCHAR}, #{peoCount,jdbcType=INTEGER}, #{persons,jdbcType=VARCHAR}, 
+      #{ids,jdbcType=VARCHAR}, #{checkInTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.CheckIn">
@@ -52,14 +52,14 @@
       <if test="roomType != null">
         room_type,
       </if>
-      <if test="personNum != null">
-        person_num,
+      <if test="peoCount != null">
+        peo_count,
       </if>
-      <if test="personName != null">
-        person_name,
+      <if test="persons != null">
+        persons,
       </if>
-      <if test="idNumbers != null">
-        id_numbers,
+      <if test="ids != null">
+        ids,
       </if>
       <if test="checkInTime != null">
         check_in_time,
@@ -82,16 +82,16 @@
         #{roomNumber,jdbcType=VARCHAR},
       </if>
       <if test="roomType != null">
-        #{roomType,jdbcType=INTEGER},
+        #{roomType,jdbcType=VARCHAR},
       </if>
-      <if test="personNum != null">
-        #{personNum,jdbcType=INTEGER},
+      <if test="peoCount != null">
+        #{peoCount,jdbcType=INTEGER},
       </if>
-      <if test="personName != null">
-        #{personName,jdbcType=VARCHAR},
+      <if test="persons != null">
+        #{persons,jdbcType=VARCHAR},
       </if>
-      <if test="idNumbers != null">
-        #{idNumbers,jdbcType=VARCHAR},
+      <if test="ids != null">
+        #{ids,jdbcType=VARCHAR},
       </if>
       <if test="checkInTime != null">
         #{checkInTime,jdbcType=TIMESTAMP},
@@ -114,16 +114,16 @@
         room_number = #{roomNumber,jdbcType=VARCHAR},
       </if>
       <if test="roomType != null">
-        room_type = #{roomType,jdbcType=INTEGER},
+        room_type = #{roomType,jdbcType=VARCHAR},
       </if>
-      <if test="personNum != null">
-        person_num = #{personNum,jdbcType=INTEGER},
+      <if test="peoCount != null">
+        peo_count = #{peoCount,jdbcType=INTEGER},
       </if>
-      <if test="personName != null">
-        person_name = #{personName,jdbcType=VARCHAR},
+      <if test="persons != null">
+        persons = #{persons,jdbcType=VARCHAR},
       </if>
-      <if test="idNumbers != null">
-        id_numbers = #{idNumbers,jdbcType=VARCHAR},
+      <if test="ids != null">
+        ids = #{ids,jdbcType=VARCHAR},
       </if>
       <if test="checkInTime != null">
         check_in_time = #{checkInTime,jdbcType=TIMESTAMP},
@@ -141,10 +141,10 @@
     update check_in
     set order_id = #{orderId,jdbcType=INTEGER},
       room_number = #{roomNumber,jdbcType=VARCHAR},
-      room_type = #{roomType,jdbcType=INTEGER},
-      person_num = #{personNum,jdbcType=INTEGER},
-      person_name = #{personName,jdbcType=VARCHAR},
-      id_numbers = #{idNumbers,jdbcType=VARCHAR},
+      room_type = #{roomType,jdbcType=VARCHAR},
+      peo_count = #{peoCount,jdbcType=INTEGER},
+      persons = #{persons,jdbcType=VARCHAR},
+      ids = #{ids,jdbcType=VARCHAR},
       check_in_time = #{checkInTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

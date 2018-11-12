@@ -32,7 +32,7 @@
       )
     values (#{hotelId,jdbcType=INTEGER}, #{hotelName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
       #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
-      #{website,jdbcType=VARCHAR}, now(),now()
+      #{website,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.Hotel">
@@ -59,8 +59,12 @@
       <if test="website != null">
         website,
       </if>
+      <if test="createTime != null">
         create_time,
+      </if>
+      <if test="updateTime != null">
         update_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="hotelId != null">
@@ -84,8 +88,12 @@
       <if test="website != null">
         #{website,jdbcType=VARCHAR},
       </if>
-        now(),
-        now(),
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.Hotel">
@@ -130,15 +138,4 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where hotel_id = #{hotelId,jdbcType=INTEGER}
   </update>
-  <select id="selectAll"  resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from hotel_info
-  </select>
-  <select id="selectByName" parameterType="String"  resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from hotel_info
-    where hotel_name = #{hotelName,jdbcType=VARCHAR}
-  </select>
 </mapper>

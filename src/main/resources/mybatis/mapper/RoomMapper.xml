@@ -4,18 +4,18 @@
   <resultMap id="BaseResultMap" type="cn.mafangui.hotel.entity.Room">
     <id column="room_id" jdbcType="INTEGER" property="roomId" />
     <result column="room_number" jdbcType="VARCHAR" property="roomNumber" />
-    <result column="room_floor" jdbcType="INTEGER" property="roomFloor" />
-    <result column="room_type" jdbcType="INTEGER" property="roomType" />
-    <result column="type_name" jdbcType="VARCHAR" property="typeName" />
-    <result column="room_price" jdbcType="DECIMAL" property="roomPrice" />
-    <result column="room_discount" jdbcType="REAL" property="roomDiscount" />
-    <result column="room_status" jdbcType="VARCHAR" property="roomStatus" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="room_type" jdbcType="VARCHAR" property="roomType" />
+    <result column="room_price" jdbcType="DOUBLE" property="roomPrice" />
+    <result column="room_discount" jdbcType="DOUBLE" property="roomDiscount" />
+    <result column="room_status" jdbcType="INTEGER" property="roomStatus" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    room_id, room_number, room_floor, room_type, type_name, room_price, room_discount, room_status,
-    create_time, update_time
+    room_id, room_number, type_id, room_type, room_price, room_discount, room_status, 
+    remark, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -27,7 +27,16 @@
     delete from room_info
     where room_id = #{roomId,jdbcType=INTEGER}
   </delete>
-
+  <insert id="insert" parameterType="cn.mafangui.hotel.entity.Room">
+    insert into room_info (room_id, room_number, type_id, 
+      room_type, room_price, room_discount, 
+      room_status, remark, create_time, 
+      update_time)
+    values (#{roomId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
+      #{roomType,jdbcType=VARCHAR}, #{roomPrice,jdbcType=DOUBLE}, #{roomDiscount,jdbcType=DOUBLE}, 
+      #{roomStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.Room">
     insert into room_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -37,8 +46,8 @@
       <if test="roomNumber != null">
         room_number,
       </if>
-      <if test="roomFloor != null">
-        room_floor,
+      <if test="typeId != null">
+        type_id,
       </if>
       <if test="roomType != null">
         room_type,
@@ -51,6 +60,9 @@
       </if>
       <if test="roomStatus != null">
         room_status,
+      </if>
+      <if test="remark != null">
+        remark,
       </if>
       <if test="createTime != null">
         create_time,
@@ -66,20 +78,23 @@
       <if test="roomNumber != null">
         #{roomNumber,jdbcType=VARCHAR},
       </if>
-      <if test="roomFloor != null">
-        #{roomFloor,jdbcType=INTEGER},
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
       </if>
       <if test="roomType != null">
-        #{roomType,jdbcType=INTEGER},
+        #{roomType,jdbcType=VARCHAR},
       </if>
       <if test="roomPrice != null">
-        #{roomPrice,jdbcType=DECIMAL},
+        #{roomPrice,jdbcType=DOUBLE},
       </if>
       <if test="roomDiscount != null">
-        #{roomDiscount,jdbcType=REAL},
+        #{roomDiscount,jdbcType=DOUBLE},
       </if>
       <if test="roomStatus != null">
-        #{roomStatus,jdbcType=VARCHAR},
+        #{roomStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -89,82 +104,50 @@
       </if>
     </trim>
   </insert>
-
+  <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.Room">
+    update room_info
+    <set>
+      <if test="roomNumber != null">
+        room_number = #{roomNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="roomType != null">
+        room_type = #{roomType,jdbcType=VARCHAR},
+      </if>
+      <if test="roomPrice != null">
+        room_price = #{roomPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="roomDiscount != null">
+        room_discount = #{roomDiscount,jdbcType=DOUBLE},
+      </if>
+      <if test="roomStatus != null">
+        room_status = #{roomStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where room_id = #{roomId,jdbcType=INTEGER}
+  </update>
   <update id="updateByPrimaryKey" parameterType="cn.mafangui.hotel.entity.Room">
     update room_info
     set room_number = #{roomNumber,jdbcType=VARCHAR},
-      room_floor = #{roomFloor,jdbcType=INTEGER},
-      room_type = #{roomType,jdbcType=INTEGER},
-      room_price = #{roomPrice,jdbcType=DECIMAL},
-      room_discount = #{roomDiscount,jdbcType=REAL},
-      room_status = #{roomStatus,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      room_type = #{roomType,jdbcType=VARCHAR},
+      room_price = #{roomPrice,jdbcType=DOUBLE},
+      room_discount = #{roomDiscount,jdbcType=DOUBLE},
+      room_status = #{roomStatus,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where room_id = #{roomId,jdbcType=INTEGER}
   </update>
-
-    <insert id="insert" parameterType="cn.mafangui.hotel.entity.Room">
-    insert into room_info ( room_number, room_floor,
-      room_type, type_name, room_price, room_discount,
-      room_status, create_time, update_time
-      )
-    values (#{roomNumber,jdbcType=VARCHAR}, #{roomFloor,jdbcType=INTEGER},
-      #{roomType,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{roomPrice,jdbcType=DECIMAL}, #{roomDiscount,jdbcType=REAL},
-      #{roomStatus,jdbcType=VARCHAR}, now(), now()
-      )
-  </insert>
-    <delete id="deleteByRoomNumber" parameterType="String">
-        delete from room_info where room_number = #{roomNumber,jdbcType=VARCHAR}
-    </delete>
-    <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.Room">
-        update room_info
-        <set>
-            <if test="roomNumber != null">
-                room_number = #{roomNumber,jdbcType=VARCHAR},
-            </if>
-            <if test="roomFloor != null">
-                room_floor = #{roomFloor,jdbcType=INTEGER},
-            </if>
-            <if test="roomType != null">
-                room_type = #{roomType,jdbcType=INTEGER},
-            </if>
-            <if test="typeName != null">
-                type_name = #{typeName,jdbcType=VARCHAR},
-            </if>
-            <if test="roomPrice != null">
-                room_price = #{roomPrice,jdbcType=DECIMAL},
-            </if>
-            <if test="roomDiscount != null">
-                room_discount = #{roomDiscount,jdbcType=REAL},
-            </if>
-            <if test="roomStatus != null">
-                room_status = #{roomStatus,jdbcType=VARCHAR},
-            </if>
-                update_time = now(),
-        </set>
-        where room_id = #{roomId,jdbcType=INTEGER}
-    </update>
-    <select id="selectByRoomNumber" parameterType="String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from room_info
-        where room_number = #{roomNumber,jdbcType=VARCHAR}
-    </select>
-    <select id="selectAllRoom" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from room_info
-    </select>
-    <select id="selectByType" parameterType="String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from room_info
-        where type_name = #{typeName,jdbcType=VARCHAR}
-    </select>
-    <select id="selectByStatus" parameterType="String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from room_info
-        where room_status = #{status,jdbcType=VARCHAR}
-    </select>
 </mapper>

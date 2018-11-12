@@ -15,37 +15,37 @@ public class WorkerServiceImpl implements WorkerService {
     private WorkerMapper workerMapper;
 
     @Override
-    public int addWorker(Worker worker) {
+    public int insert(Worker worker) {
         return workerMapper.insertSelective(worker);
     }
 
     @Override
-    public int delWorker(String userName) {
-        return workerMapper.deleteByUserName(userName);
+    public int delete(int workerId) {
+        return workerMapper.deleteByPrimaryKey(workerId);
     }
 
     @Override
-    public int updateWorker(Worker worker) {
-        return workerMapper.updateByUserNameSelective(worker);
+    public int updateById(Worker worker) {
+        return workerMapper.updateByPrimaryKeySelective(worker);
     }
 
     @Override
-    public Worker selectWorker(String userName) {
-        return workerMapper.selectByUserName(userName);
+    public Worker selectById(int workerId) {
+        return workerMapper.selectByPrimaryKey(workerId);
     }
 
     @Override
-    public List<Worker> findAllWorker() {
-        return workerMapper.findAll();
+    public List<Worker> findAll() {
+        return workerMapper.selectAll();
     }
 
     @Override
-    public Worker login(Worker worker) {
-        return workerMapper.selectByUserNameAndPassword(worker);
+    public List<Worker> selectByRole(String role) {
+        return workerMapper.selectByRole(role);
     }
 
     @Override
-    public int logout(Worker worker) {
-        return 0;
+    public Worker login(String username, String password) {
+        return workerMapper.selectByUsernameAndPassword(username,password);
     }
 }
