@@ -24,6 +24,17 @@
     from user_info
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from user_info
+  </select>
+  <select id="selectByUsernameAndPassword" parameterType="String" resultMap="BaseResultMap">
+    select * from user_info
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUsername" parameterType="String" resultMap="BaseResultMap">
+    select * from user_info
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_info
     where user_id = #{userId,jdbcType=INTEGER}
@@ -35,8 +46,8 @@
       update_time)
     values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{address,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, now(),
+      now())
   </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.User">
     insert into user_info
@@ -68,12 +79,8 @@
       <if test="idcard != null">
         idcard,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
-      <if test="updateTime != null">
         update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -103,12 +110,8 @@
       <if test="idcard != null">
         #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
+      now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.User">
@@ -138,12 +141,7 @@
       <if test="idcard != null">
         idcard = #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
@@ -157,8 +155,7 @@
       email = #{email,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       idcard = #{idcard,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -7,18 +7,18 @@ import java.util.List;
 
 public interface UserService {
 
-    User selectById(int id);
+    User selectById(int userId);
 
-    int register(User user);
+    int insertUser(User user);
 
-    User login(String userName, String password);
+    int deleteUser(int userId);
 
-    User selectByUserName(String userName);
+    int updateUser(User user);
 
-//    int count();
-//
-//    List<User> findAll();
-//
-//    int updateProfile(User user);
+    User selectByUsernameAndPassword(String username, String password);
+
+    User selectByUsername(String username);
+
+    List<User> selectAll();
 
 }
