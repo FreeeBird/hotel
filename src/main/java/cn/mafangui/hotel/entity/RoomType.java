@@ -113,6 +113,20 @@ public class RoomType {
         this.updateTime = updateTime;
     }
 
+    public RoomType() {
+    }
+
+    public RoomType(String roomType, String remark, Double price, Double discount, Integer area, Integer bedNum, String bedSize, Integer window) {
+        this.roomType = roomType;
+        this.remark = remark;
+        this.price = price;
+        this.discount = discount;
+        this.area = area;
+        this.bedNum = bedNum;
+        this.bedSize = bedSize;
+        this.window = window;
+    }
+
     @Override
     public String toString() {
         return "RoomType{" +

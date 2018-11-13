@@ -20,7 +20,7 @@ public interface WorkerMapper {
 
     int updateByPrimaryKey(Worker record);
 
-    Worker selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+    Worker selectByUsernameAndPassword(@Param("username") String username, @Param("password") String password, @Param("role") String role);
 
     List<Worker> selectByRole(String role);
 

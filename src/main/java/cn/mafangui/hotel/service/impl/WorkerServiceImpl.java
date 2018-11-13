@@ -45,7 +45,7 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
-    public Worker login(String username, String password) {
-        return workerMapper.selectByUsernameAndPassword(username,password);
+    public Worker login(String username, String password,String role) {
+        return workerMapper.selectByUsernameAndPassword(username,password,role);
     }
 }

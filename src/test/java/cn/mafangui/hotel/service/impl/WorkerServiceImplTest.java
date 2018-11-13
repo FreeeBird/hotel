@@ -94,7 +94,7 @@ public class WorkerServiceImplTest {
     public void login() {
         String username = "admin";
         String password = "admin";
-        Worker worker = workerService.login(username,password);
+        Worker worker = workerService.login(username,password,"admin");
         Assert.assertNotNull(worker);
     }
 }

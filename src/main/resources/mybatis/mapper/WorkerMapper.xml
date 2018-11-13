@@ -27,7 +27,7 @@
   </select>
   <select id="selectByUsernameAndPassword" parameterType="String" resultMap="BaseResultMap">
     select * from worker_info
-    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} and role = #{role,jdbcType=VARCHAR}
   </select>
   <select id="selectByRole" parameterType="String" resultMap="BaseResultMap">
     select * from worker_info

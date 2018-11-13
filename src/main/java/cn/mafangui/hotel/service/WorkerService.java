@@ -11,5 +11,5 @@ public interface WorkerService {
     Worker selectById(int workerId);
     List<Worker> findAll();
     List<Worker> selectByRole(String role);
-    Worker login(String username,String password);
+    Worker login(String username,String password,String role);
 }
