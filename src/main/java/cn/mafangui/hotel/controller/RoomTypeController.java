@@ -22,6 +22,12 @@ public class RoomTypeController {
         return roomTypeService.findAllType();
     }
 
+    @RequestMapping(value = "/withId")
+    public RoomType getById(int typeId){
+        return roomTypeService.selectById(typeId);
+    }
+
+
     @RequestMapping(method = RequestMethod.POST,value = "/add")
     public int addRoomType(String roomType,Double price,Double discount,int area,
                            int bedNum,String bedSize,int window,String remark){
