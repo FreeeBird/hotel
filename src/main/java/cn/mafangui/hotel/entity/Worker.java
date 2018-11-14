@@ -123,6 +123,19 @@ public class Worker {
         this.updateTime = updateTime;
     }
 
+    public Worker() {
+    }
+
+    public Worker(String username, String password, String name, String gender, String phone, String email, String address) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Worker{" +
