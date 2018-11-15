@@ -52,4 +52,23 @@ public class OrderType {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public OrderType() {
+    }
+
+    public OrderType(String type, String remark) {
+        this.type = type;
+        this.remark = remark;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderType{" +
+                "typeId=" + typeId +
+                ", type='" + type + '\'' +
+                ", remark='" + remark + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

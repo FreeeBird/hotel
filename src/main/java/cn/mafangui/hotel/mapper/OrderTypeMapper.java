@@ -1,7 +1,12 @@
 package cn.mafangui.hotel.mapper;
 
 import cn.mafangui.hotel.entity.OrderType;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+
+
+@Component
 public interface OrderTypeMapper {
     int deleteByPrimaryKey(Integer typeId);
 
@@ -14,4 +19,8 @@ public interface OrderTypeMapper {
     int updateByPrimaryKeySelective(OrderType record);
 
     int updateByPrimaryKey(OrderType record);
+
+    List<OrderType> selectAll();
+
+
 }

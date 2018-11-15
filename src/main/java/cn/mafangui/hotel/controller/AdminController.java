@@ -2,6 +2,7 @@ package cn.mafangui.hotel.controller;
 
 import cn.mafangui.hotel.entity.Room;
 import cn.mafangui.hotel.entity.RoomType;
+import cn.mafangui.hotel.entity.Worker;
 import cn.mafangui.hotel.service.RoomService;
 import cn.mafangui.hotel.service.RoomTypeService;
 import cn.mafangui.hotel.service.WorkerService;
@@ -36,7 +37,13 @@ public class AdminController {
         else return 0;
     }
 
-    // TODO
+    @RequestMapping(method = RequestMethod.POST,value = "/withUsername")
+    public Worker getByUsername(String username) {
+        Worker res = workerService.selectByUsername(username);
+        res.setPassword(null);
+        return res;
+    }
+
 
 
 

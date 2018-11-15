@@ -24,5 +24,7 @@ public interface WorkerMapper {
 
     List<Worker> selectByRole(String role);
 
+    Worker selectByUsername(String username);
+
     List<Worker> selectAll();
 }

@@ -35,6 +35,11 @@ public class WorkerServiceImpl implements WorkerService {
     }
 
     @Override
+    public Worker selectByUsername(String username) {
+        return workerMapper.selectByUsername(username);
+    }
+
+    @Override
     public List<Worker> findAll() {
         return workerMapper.selectAll();
     }

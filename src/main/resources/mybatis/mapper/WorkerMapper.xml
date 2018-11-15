@@ -25,6 +25,12 @@
     from worker_info
     where worker_id = #{workerId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUsername" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from worker_info
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
   <select id="selectByUsernameAndPassword" parameterType="String" resultMap="BaseResultMap">
     select * from worker_info
     where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} and role = #{role,jdbcType=VARCHAR}
