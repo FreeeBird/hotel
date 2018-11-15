@@ -92,4 +92,31 @@ public class Hotel {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+    public Hotel() {
+    }
+
+    public Hotel(String hotelName, String phone, String telephone, String email, String address, String website) {
+        this.hotelName = hotelName;
+        this.phone = phone;
+        this.telephone = telephone;
+        this.email = email;
+        this.address = address;
+        this.website = website;
+    }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "hotelId=" + hotelId +
+                ", hotelName='" + hotelName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", website='" + website + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

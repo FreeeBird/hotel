@@ -21,6 +21,17 @@
     from hotel_info
     where hotel_id = #{hotelId,jdbcType=INTEGER}
   </select>
+  <select id="selectByName" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hotel_info
+    where hotel_name = #{hotelName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hotel_info
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from hotel_info
     where hotel_id = #{hotelId,jdbcType=INTEGER}
@@ -59,12 +70,8 @@
       <if test="website != null">
         website,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
-      <if test="updateTime != null">
         update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="hotelId != null">
@@ -88,12 +95,8 @@
       <if test="website != null">
         #{website,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
+      now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.Hotel">
@@ -117,12 +120,7 @@
       <if test="website != null">
         website = #{website,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
     </set>
     where hotel_id = #{hotelId,jdbcType=INTEGER}
   </update>

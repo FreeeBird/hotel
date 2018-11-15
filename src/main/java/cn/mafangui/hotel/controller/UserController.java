@@ -15,6 +15,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 用户登录
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/login")
     public int userLogin(String username,String password){
         int result = 0;
@@ -25,12 +31,35 @@ public class UserController {
         return result;
     }
 
+    /**
+     * 用户注册
+     * @param username
+     * @param password
+     * @param name
+     * @param gender
+     * @param phone
+     * @param email
+     * @param address
+     * @param idcard
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/register")
     public int userRegister(String username,String password,String name,String gender,String phone,String email,String address,String idcard){
         User user = new User(username,password,name,gender,phone,email,address,idcard);
         return userService.insertUser(user);
     }
 
+    /**
+     * 更新用户信息
+     * @param userId
+     * @param name
+     * @param gender
+     * @param phone
+     * @param email
+     * @param address
+     * @param idcard
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/update")
     public int userUpdate(int userId,String name,String gender,String phone,String email,String address,String idcard){
         User user = new User();
@@ -44,6 +73,13 @@ public class UserController {
         return userService.updateUser(user);
     }
 
+    /**
+     * 更改密码
+     * @param username
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/updatePassword")
     public int updatePassword(String username,String oldPassword,String newPassword){
         User user = userService.selectByUsernameAndPassword(username,oldPassword);
@@ -55,11 +91,20 @@ public class UserController {
         }
     }
 
+    /**
+     * 所有用户
+     * @return
+     */
     @RequestMapping(value = "/all")
     public List<User> getAllUser(){
         return userService.selectAll();
     }
 
+    /**
+     * 判断用户名是否存在
+     * @param username
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/isUsernameExist")
     public int isUsernameExist(String username){
         int result = 0;
