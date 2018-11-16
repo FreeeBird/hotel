@@ -9,8 +9,6 @@ public class CheckIn {
 
     private String roomNumber;
 
-    private String roomType;
-
     private Integer peoCount;
 
     private String persons;
@@ -19,9 +17,19 @@ public class CheckIn {
 
     private Date checkInTime;
 
+    private Date checkOutTime;
+
     private Date createTime;
 
     private Date updateTime;
+
+    public Date getCheckOutTime() {
+        return checkOutTime;
+    }
+
+    public void setCheckOutTime(Date checkOutTime) {
+        this.checkOutTime = checkOutTime;
+    }
 
     public Integer getCheckInId() {
         return checkInId;
@@ -47,13 +55,6 @@ public class CheckIn {
         this.roomNumber = roomNumber == null ? null : roomNumber.trim();
     }
 
-    public String getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(String roomType) {
-        this.roomType = roomType == null ? null : roomType.trim();
-    }
 
     public Integer getPeoCount() {
         return peoCount;
@@ -101,5 +102,32 @@ public class CheckIn {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public CheckIn() {
+    }
+
+    public CheckIn(String roomNumber, String roomType, Integer peoCount, String persons, String ids, Date checkInTime) {
+        this.roomNumber = roomNumber;
+        this.peoCount = peoCount;
+        this.persons = persons;
+        this.ids = ids;
+        this.checkInTime = checkInTime;
+    }
+
+    @Override
+    public String toString() {
+        return "CheckIn{" +
+                "checkInId=" + checkInId +
+                ", orderId=" + orderId +
+                ", roomNumber='" + roomNumber + '\'' +
+                ", peoCount=" + peoCount +
+                ", persons='" + persons + '\'' +
+                ", ids='" + ids + '\'' +
+                ", checkInTime=" + checkInTime +
+                ", checkOutTime=" + checkOutTime +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

@@ -5,16 +5,16 @@
     <id column="check_in_id" jdbcType="INTEGER" property="checkInId" />
     <result column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="room_number" jdbcType="VARCHAR" property="roomNumber" />
-    <result column="room_type" jdbcType="VARCHAR" property="roomType" />
     <result column="peo_count" jdbcType="INTEGER" property="peoCount" />
     <result column="persons" jdbcType="VARCHAR" property="persons" />
     <result column="ids" jdbcType="VARCHAR" property="ids" />
     <result column="check_in_time" jdbcType="TIMESTAMP" property="checkInTime" />
+    <result column="check_out_time" jdbcType="TIMESTAMP" property="checkOutTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    check_in_id, order_id, room_number, room_type, peo_count, persons, ids, check_in_time, 
+    check_in_id, order_id, room_number,peo_count, persons, ids, check_in_time, check_out_time,
     create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -23,17 +23,22 @@
     from check_in
     where check_in_id = #{checkInId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from check_in
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from check_in
     where check_in_id = #{checkInId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.mafangui.hotel.entity.CheckIn">
     insert into check_in (check_in_id, order_id, room_number, 
-      room_type, peo_count, persons, 
+     peo_count, persons,
       ids, check_in_time, create_time, 
       update_time)
     values (#{checkInId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR}, 
-      #{roomType,jdbcType=VARCHAR}, #{peoCount,jdbcType=INTEGER}, #{persons,jdbcType=VARCHAR}, 
+       #{peoCount,jdbcType=INTEGER}, #{persons,jdbcType=VARCHAR},
       #{ids,jdbcType=VARCHAR}, #{checkInTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
@@ -49,9 +54,6 @@
       <if test="roomNumber != null">
         room_number,
       </if>
-      <if test="roomType != null">
-        room_type,
-      </if>
       <if test="peoCount != null">
         peo_count,
       </if>
@@ -64,12 +66,8 @@
       <if test="checkInTime != null">
         check_in_time,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
-      <if test="updateTime != null">
         update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="checkInId != null">
@@ -80,9 +78,6 @@
       </if>
       <if test="roomNumber != null">
         #{roomNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="roomType != null">
-        #{roomType,jdbcType=VARCHAR},
       </if>
       <if test="peoCount != null">
         #{peoCount,jdbcType=INTEGER},
@@ -96,12 +91,11 @@
       <if test="checkInTime != null">
         #{checkInTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
+      <if test="checkOutTime != null">
+        #{checkOutTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
+      now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.CheckIn">
@@ -112,9 +106,6 @@
       </if>
       <if test="roomNumber != null">
         room_number = #{roomNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="roomType != null">
-        room_type = #{roomType,jdbcType=VARCHAR},
       </if>
       <if test="peoCount != null">
         peo_count = #{peoCount,jdbcType=INTEGER},
@@ -128,26 +119,30 @@
       <if test="checkInTime != null">
         check_in_time = #{checkInTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+      <if test="checkOutTime != null">
+        check_out_time = #{checkOutTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
     </set>
     where check_in_id = #{checkInId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByRoomNumber" parameterType="String">
+    update check_in
+    set
+      check_out_time = now(),
+      update_time = now()
+    where room_number = #{roomNumber,jdbcType=VARCHAR} and check_out_time = '0000-00-00 00:00:00'
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.mafangui.hotel.entity.CheckIn">
     update check_in
     set order_id = #{orderId,jdbcType=INTEGER},
       room_number = #{roomNumber,jdbcType=VARCHAR},
-      room_type = #{roomType,jdbcType=VARCHAR},
       peo_count = #{peoCount,jdbcType=INTEGER},
       persons = #{persons,jdbcType=VARCHAR},
       ids = #{ids,jdbcType=VARCHAR},
       check_in_time = #{checkInTime,jdbcType=TIMESTAMP},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      check_out_time = #{checkOutTime,jdbcType=TIMESTAMP},
+      update_time = now()
     where check_in_id = #{checkInId,jdbcType=INTEGER}
   </update>
 </mapper>
