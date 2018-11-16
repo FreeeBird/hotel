@@ -21,4 +21,6 @@ public interface UserService {
 
     List<User> selectAll();
 
+    List<User> selectAllUser();
+
 }

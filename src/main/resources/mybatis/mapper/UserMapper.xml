@@ -24,12 +24,17 @@
     from user_info
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+  <select id="selectAllUser" resultMap="BaseResultMap">
+    select * from user_info
+    where username != ''
+  </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select * from user_info
   </select>
   <select id="selectByUsernameAndPassword" parameterType="String" resultMap="BaseResultMap">
     select * from user_info
-    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+    where username != '' and password != '' and
+    username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
   <select id="selectByUsername" parameterType="String" resultMap="BaseResultMap">
     select * from user_info

@@ -7,11 +7,12 @@ public class Order {
 
     private String orderType;
 
+    private int userId;
+
     private String phone;
 
     private String roomType;
 
-    private Integer numOfRoom;
 
     private Date orderDate;
 
@@ -24,6 +25,14 @@ public class Order {
     private Date createTime;
 
     private Date updateTime;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public Integer getOrderId() {
         return orderId;
@@ -55,14 +64,6 @@ public class Order {
 
     public void setRoomType(String roomType) {
         this.roomType = roomType == null ? null : roomType.trim();
-    }
-
-    public Integer getNumOfRoom() {
-        return numOfRoom;
-    }
-
-    public void setNumOfRoom(Integer numOfRoom) {
-        this.numOfRoom = numOfRoom;
     }
 
     public Date getOrderDate() {
@@ -111,5 +112,45 @@ public class Order {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Order() {
+    }
+
+    public Order(String orderType, int userId, String phone, String roomType, Date orderDate, Integer orderDays, Integer orderStatus, Double orderCost) {
+        this.orderType = orderType;
+        this.userId = userId;
+        this.phone = phone;
+        this.roomType = roomType;
+        this.orderDate = orderDate;
+        this.orderDays = orderDays;
+        this.orderStatus = orderStatus;
+        this.orderCost = orderCost;
+    }
+
+    public Order(String orderType, String roomType, Date orderDate, Integer orderDays, Integer orderStatus, Double orderCost) {
+        this.orderType = orderType;
+        this.roomType = roomType;
+        this.orderDate = orderDate;
+        this.orderDays = orderDays;
+        this.orderStatus = orderStatus;
+        this.orderCost = orderCost;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", orderType='" + orderType + '\'' +
+                ", userId=" + userId +
+                ", phone='" + phone + '\'' +
+                ", roomType='" + roomType + '\'' +
+                ", orderDate=" + orderDate +
+                ", orderDays=" + orderDays +
+                ", orderStatus=" + orderStatus +
+                ", orderCost=" + orderCost +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
     }
 }

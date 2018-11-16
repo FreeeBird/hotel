@@ -24,6 +24,9 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST,value = "/login")
     public int userLogin(String username,String password){
         int result = 0;
+        if (username == null | username == "" | password == null | password == ""){
+            return -1;
+        }
         if (userService.selectByUsernameAndPassword(username,password) != null){
             result = 1;
         }
@@ -92,12 +95,21 @@ public class UserController {
     }
 
     /**
-     * 所有用户
+     * 所有在记录的用户和客户
      * @return
      */
     @RequestMapping(value = "/all")
-    public List<User> getAllUser(){
+    public List<User> getAll(){
         return userService.selectAll();
+    }
+
+    /**
+     * 所有注册用户
+     * @return
+     */
+    @RequestMapping(value = "/allUser")
+    public List<User> getAllUser(){
+        return userService.selectAllUser();
     }
 
     /**
@@ -113,6 +125,11 @@ public class UserController {
         }
         else result = 0;
         return result;
+    }
+
+    @RequestMapping(value = "/delete")
+    public int deleteUser(int userId){
+        return userService.deleteUser(userId);
     }
 
 }

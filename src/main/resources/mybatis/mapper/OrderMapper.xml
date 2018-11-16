@@ -4,9 +4,9 @@
   <resultMap id="BaseResultMap" type="cn.mafangui.hotel.entity.Order">
     <id column="order_id" jdbcType="INTEGER" property="orderId" />
     <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="room_type" jdbcType="VARCHAR" property="roomType" />
-    <result column="num_of_room" jdbcType="INTEGER" property="numOfRoom" />
     <result column="order_date" jdbcType="DATE" property="orderDate" />
     <result column="order_days" jdbcType="INTEGER" property="orderDays" />
     <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
@@ -15,7 +15,7 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    order_id, order_type, phone, room_type, num_of_room, order_date, order_days, order_status, 
+    order_id, order_type, user_id, phone, room_type,  order_date, order_days, order_status,
     order_cost, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -23,6 +23,17 @@
     <include refid="Base_Column_List" />
     from order_info
     where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_info
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_info
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from order_info
@@ -68,12 +79,8 @@
       <if test="orderCost != null">
         order_cost,
       </if>
-      <if test="createTime != null">
         create_time,
-      </if>
-      <if test="updateTime != null">
         update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="orderId != null">
@@ -103,12 +110,8 @@
       <if test="orderCost != null">
         #{orderCost,jdbcType=DOUBLE},
       </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+      now(),
+      now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.mafangui.hotel.entity.Order">
@@ -138,12 +141,7 @@
       <if test="orderCost != null">
         order_cost = #{orderCost,jdbcType=DOUBLE},
       </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        update_time = now(),
     </set>
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
@@ -157,8 +155,7 @@
       order_days = #{orderDays,jdbcType=INTEGER},
       order_status = #{orderStatus,jdbcType=INTEGER},
       order_cost = #{orderCost,jdbcType=DOUBLE},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = now()
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>
 </mapper>
