@@ -13,8 +13,12 @@ import java.util.List;
 @RequestMapping(value = "/checkIn")
 public class CheckInController {
 
+    private final CheckInService checkInService;
+
     @Autowired
-    private CheckInService checkInService;
+    public CheckInController(CheckInService checkInService) {
+        this.checkInService = checkInService;
+    }
 
     @RequestMapping(value = "/add")
     public int addCheckIn(int peo_count, String persons, String ids){
@@ -28,7 +32,7 @@ public class CheckInController {
 
     @RequestMapping(value = "/delete")
     public int deleteCheckIn(int checkId){
-        return checkInService.delete(checkId)
+        return checkInService.delete(checkId);
     }
 
     @RequestMapping(value = "/update")
