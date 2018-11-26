@@ -4,6 +4,7 @@ import cn.mafangui.hotel.entity.Order;
 import cn.mafangui.hotel.service.OrderService;
 import cn.mafangui.hotel.utils.StaticString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +18,10 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping(value = "/add")
-    public int addOrder(String orderType,int userId, String phone, String roomType,
-                        Integer numOfRoom, Date orderDate, Integer orderDays, Integer orderStatus, Double orderCost){
+    public int addOrder(String orderType, int userId,String name, String phone, String roomType,
+                        @DateTimeFormat(pattern = "yyyy-MM-dd") Date orderDate, Integer orderDays, Integer orderStatus, Double orderCost){
         Order order = new Order(orderType,userId,phone,roomType,orderDate,orderDays,orderStatus,orderCost);
+        order.setName(name);
         return orderService.insert(order);
     }
 
@@ -44,6 +46,23 @@ public class OrderController {
         return orderService.update(order);
     }
 
+    @RequestMapping(value = "/cancel")
+    public int cancelOrder(int orderId){
+        Order order = new Order();
+        order.setOrderId(orderId);
+        order.setOrderStatus(StaticString.WAS_CANCELED);
+        return orderService.update(order);
+    }
+
+    @RequestMapping(value = "/overtime")
+    public int orderOver(int orderId){
+        Order order = new Order();
+        order.setOrderId(orderId);
+        order.setOrderStatus(StaticString.OVERTIME);
+        return orderService.update(order);
+    }
+
+
     @RequestMapping(value = "/all")
     public List<Order> getAllOrder(){
         return orderService.selectAll();
@@ -52,6 +71,11 @@ public class OrderController {
     @RequestMapping(value = "/withUserId")
     public List<Order> getByUser(int userId){
         return orderService.selectByUserId(userId);
+    }
+
+    @RequestMapping(value = "/userOrder")
+    public List<Order> getAllByUser(int userId){
+        return orderService.userSelectAll(userId);
     }
 
     @RequestMapping(value = "/withId")

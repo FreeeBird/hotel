@@ -1,7 +1,10 @@
 package cn.mafangui.hotel.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
+@Component
 public class Worker {
     private Integer workerId;
 

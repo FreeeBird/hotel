@@ -1,10 +1,7 @@
 package cn.mafangui.hotel.controller;
 
-import cn.mafangui.hotel.entity.Room;
-import cn.mafangui.hotel.entity.RoomType;
 import cn.mafangui.hotel.entity.Worker;
 import cn.mafangui.hotel.service.RoomService;
-import cn.mafangui.hotel.service.RoomTypeService;
 import cn.mafangui.hotel.service.WorkerService;
 import cn.mafangui.hotel.utils.StaticString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +17,6 @@ public class AdminController {
 
     @Autowired
     private WorkerService workerService;
-    @Autowired
-    private RoomService roomService;
 
 
     /**

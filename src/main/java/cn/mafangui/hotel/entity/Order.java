@@ -9,10 +9,19 @@ public class Order {
 
     private int userId;
 
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     private String phone;
 
     private String roomType;
-
 
     private Date orderDate;
 
@@ -132,6 +141,15 @@ public class Order {
         this.orderType = orderType;
         this.roomType = roomType;
         this.orderDate = orderDate;
+        this.orderDays = orderDays;
+        this.orderStatus = orderStatus;
+        this.orderCost = orderCost;
+    }
+    public Order(String orderType, int userId, String phone,String roomType,Integer orderDays, Integer orderStatus, Double orderCost) {
+        this.userId = userId;
+        this.phone = phone;
+        this.orderType = orderType;
+        this.roomType = roomType;
         this.orderDays = orderDays;
         this.orderStatus = orderStatus;
         this.orderCost = orderCost;

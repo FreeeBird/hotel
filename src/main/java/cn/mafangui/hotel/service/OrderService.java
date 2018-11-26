@@ -17,4 +17,6 @@ public interface OrderService {
     List<Order> selectByUserId(int userId);
 
     List<Order> selectAll();
+
+    List<Order> userSelectAll(int userId);
 }

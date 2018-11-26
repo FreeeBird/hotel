@@ -43,4 +43,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> selectAll() {
         return orderMapper.selectAll();
     }
+
+    @Override
+    public List<Order> userSelectAll(int userId) {
+        return orderMapper.userSelectAll(userId);
+    }
 }

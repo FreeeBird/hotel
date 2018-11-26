@@ -127,6 +127,18 @@ public class UserController {
         return result;
     }
 
+    @RequestMapping(method = RequestMethod.POST,value = "/withUsername")
+    public User getByUsername(String username){
+        User user = userService.selectByUsername(username);
+        user.setPassword(null);
+        return user;
+    }
+
+    @RequestMapping(method = RequestMethod.POST,value = "/withId")
+    public User getById(int userId){
+        return userService.selectById(userId);
+    }
+
     @RequestMapping(value = "/delete")
     public int deleteUser(int userId){
         return userService.deleteUser(userId);

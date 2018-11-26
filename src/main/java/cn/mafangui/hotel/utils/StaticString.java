@@ -24,19 +24,20 @@ public class StaticString {
     public static final int IN_USE = 3;
     /**
      * 订单状态
-     * 被用户删除-2
+     * 被用户删除-3
+     * 超时 -2
      * 被取消-1
      * 未付款0
      * 已付款1
      * 已入住2
-     * 超时3
+     *
      */
-    public static final int WAS_DELETE = -2;
+    public static final int WAS_DELETE = -3;
+    public static final int OVERTIME = -2;
     public static final int WAS_CANCELED = -1;
     public static final int UNPAID = 0;
     public static final int PAID = 1;
     public static final int WAS_USED = 2;
-    public static final int OVERTIME = 3;
 
 
 }
