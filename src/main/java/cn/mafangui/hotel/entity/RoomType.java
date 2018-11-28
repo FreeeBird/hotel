@@ -21,6 +21,16 @@ public class RoomType {
 
     private Integer window;
 
+    private Integer rest;
+
+    public Integer getRest() {
+        return rest;
+    }
+
+    public void setRest(Integer rest) {
+        this.rest = rest;
+    }
+
     private Date createTime;
 
     private Date updateTime;
@@ -114,6 +124,7 @@ public class RoomType {
     }
 
     public RoomType() {
+        this.rest = 0;
     }
 
     public RoomType(String roomType, String remark, Double price, Double discount, Integer area, Integer bedNum, String bedSize, Integer window) {

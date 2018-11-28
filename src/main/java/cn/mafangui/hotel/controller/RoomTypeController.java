@@ -32,6 +32,7 @@ public class RoomTypeController {
     public int addRoomType(String roomType,Double price,Double discount,int area,
                            int bedNum,String bedSize,int window,String remark){
         RoomType rt = new RoomType(roomType,remark,price,discount,area,bedNum,bedSize,window);
+        rt.setRest(0);
         int result = 0;
         result = roomTypeService.insert(rt);
         return result;
@@ -39,9 +40,10 @@ public class RoomTypeController {
 
     @RequestMapping(method = RequestMethod.POST,value = "/update")
     public int updateRoomType(int typeId,String roomType,Double price,Double discount,int area,
-                           int bedNum,String bedSize,int window,String remark){
+                           int bedNum,String bedSize,int window,int rest,String remark){
         RoomType rt = new RoomType(roomType,remark,price,discount,area,bedNum,bedSize,window);
         rt.setTypeId(typeId);
+        rt.setRest(rest);
         int result = 0;
         result = roomTypeService.update(rt);
         return result;

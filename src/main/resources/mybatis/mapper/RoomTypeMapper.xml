@@ -11,15 +11,16 @@
     <result column="bed_num" jdbcType="INTEGER" property="bedNum" />
     <result column="bed_size" jdbcType="VARCHAR" property="bedSize" />
     <result column="window" jdbcType="INTEGER" property="window" />
+    <result column="rest" jdbcType="INTEGER" property="rest" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    type_id, room_type, remark, price, discount, area, bed_num, bed_size, window, create_time, 
+    type_id, room_type, remark, price, discount, area, bed_num, bed_size, window, rest,create_time,
     update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from room_type
     where type_id = #{typeId,jdbcType=INTEGER}
@@ -35,13 +36,14 @@
     where type_id = #{typeId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.mafangui.hotel.entity.RoomType">
-    insert into room_type (type_id, room_type, remark, 
-      price, discount, area, 
-      bed_num, bed_size, window, 
+    insert into room_type (type_id, room_type, remark,
+      price, discount, area,
+      bed_num, bed_size, window, rest
       create_time, update_time)
     values (#{typeId,jdbcType=INTEGER}, #{roomType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
-      #{price,jdbcType=DOUBLE}, #{discount,jdbcType=DOUBLE}, #{area,jdbcType=INTEGER}, 
-      #{bedNum,jdbcType=INTEGER}, #{bedSize,jdbcType=VARCHAR}, #{window,jdbcType=INTEGER}, 
+      #{price,jdbcType=DOUBLE}, #{discount,jdbcType=DOUBLE}, #{area,jdbcType=INTEGER},
+      #{bedNum,jdbcType=INTEGER}, #{bedSize,jdbcType=VARCHAR}, #{window,jdbcType=INTEGER},
+      #{rest,jdbcType=INTEGER},
       now(), now())
   </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.RoomType">
@@ -74,6 +76,9 @@
       <if test="window != null">
         window,
       </if>
+      <if test="rest != null">
+        rest,
+      </if>
         create_time,
         update_time,
     </trim>
@@ -104,6 +109,9 @@
       </if>
       <if test="window != null">
         #{window,jdbcType=INTEGER},
+      </if>
+      <if test="rest != null">
+        #{rest,jdbcType=INTEGER},
       </if>
       now(),
       now(),
@@ -136,6 +144,9 @@
       <if test="window != null">
         window = #{window,jdbcType=INTEGER},
       </if>
+      <if test="rest != null">
+        rest = #{rest,jdbcType=INTEGER},
+      </if>
         update_time = now(),
     </set>
     where type_id = #{typeId,jdbcType=INTEGER}
@@ -150,6 +161,7 @@
       bed_num = #{bedNum,jdbcType=INTEGER},
       bed_size = #{bedSize,jdbcType=VARCHAR},
       window = #{window,jdbcType=INTEGER},
+      rest = #{rest,jdbcType=INTEGER},
       update_time = now()
     where type_id = #{typeId,jdbcType=INTEGER}
   </update>

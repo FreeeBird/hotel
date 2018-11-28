@@ -8,6 +8,8 @@ public interface OrderService {
 
     int insert(Order order);
 
+    int addOrder(Order order);
+
     int delete(Integer orderId);
 
     Order selectById(Integer orderId);
@@ -16,7 +18,7 @@ public interface OrderService {
 
     List<Order> selectByUserId(int userId);
 
-    List<Order> selectAll();
+    List<Order> AllOrders();
 
-    List<Order> userSelectAll(int userId);
+    List<Order> UsersAllOrders(int userId);
 }

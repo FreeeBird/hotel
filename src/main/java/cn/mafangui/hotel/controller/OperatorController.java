@@ -1,8 +1,8 @@
 package cn.mafangui.hotel.controller;
 
 import cn.mafangui.hotel.entity.Worker;
+import cn.mafangui.hotel.enums.Role;
 import cn.mafangui.hotel.service.WorkerService;
-import cn.mafangui.hotel.utils.StaticString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +18,7 @@ public class OperatorController {
 
     @RequestMapping(method = RequestMethod.POST,value = "/login")
     public int login(String username,String password){
-        if(workerService.login(username,password, StaticString.OPERATOR) != null)
+        if(workerService.login(username,password, Role.OPERATOR.getValue()) != null)
             return 1;
         else return 0;
     }
@@ -30,7 +30,7 @@ public class OperatorController {
 
     @RequestMapping(value = "/all")
     public List<Worker> getAllOperator(){
-        return workerService.selectByRole(StaticString.OPERATOR);
+        return workerService.selectByRole(Role.OPERATOR.getValue());
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/withId")
@@ -41,7 +41,7 @@ public class OperatorController {
     @RequestMapping(method = RequestMethod.POST,value = "/add")
     public int addOperator(String username,String password,String name,String gender,String phone,String email,String address){
         Worker worker = new Worker(username,password,name,gender,phone,email,address);
-        worker.setRole(StaticString.OPERATOR);
+        worker.setRole(Role.OPERATOR.getValue());
         return workerService.insert(worker);
     }
 

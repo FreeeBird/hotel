@@ -5,21 +5,17 @@ import java.util.Date;
 public class Order {
     private Integer orderId;
 
+    private Integer orderTypeId;
+
     private String orderType;
 
-    private int userId;
+    private Integer userId;
 
     private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     private String phone;
+
+    private Integer roomTypeId;
 
     private String roomType;
 
@@ -35,20 +31,20 @@ public class Order {
 
     private Date updateTime;
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public Integer getOrderId() {
         return orderId;
     }
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    public Integer getOrderTypeId() {
+        return orderTypeId;
+    }
+
+    public void setOrderTypeId(Integer orderTypeId) {
+        this.orderTypeId = orderTypeId;
     }
 
     public String getOrderType() {
@@ -59,12 +55,36 @@ public class Order {
         this.orderType = orderType == null ? null : orderType.trim();
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone == null ? null : phone.trim();
+    }
+
+    public Integer getRoomTypeId() {
+        return roomTypeId;
+    }
+
+    public void setRoomTypeId(Integer roomTypeId) {
+        this.roomTypeId = roomTypeId;
     }
 
     public String getRoomType() {
@@ -126,10 +146,13 @@ public class Order {
     public Order() {
     }
 
-    public Order(String orderType, int userId, String phone, String roomType, Date orderDate, Integer orderDays, Integer orderStatus, Double orderCost) {
+    public Order(Integer orderTypeId, String orderType, Integer userId, String name, String phone, Integer roomTypeId, String roomType, Date orderDate, Integer orderDays, Integer orderStatus, Double orderCost) {
+        this.orderTypeId = orderTypeId;
         this.orderType = orderType;
         this.userId = userId;
+        this.name = name;
         this.phone = phone;
+        this.roomTypeId = roomTypeId;
         this.roomType = roomType;
         this.orderDate = orderDate;
         this.orderDays = orderDays;
@@ -137,31 +160,22 @@ public class Order {
         this.orderCost = orderCost;
     }
 
-    public Order(String orderType, String roomType, Date orderDate, Integer orderDays, Integer orderStatus, Double orderCost) {
-        this.orderType = orderType;
-        this.roomType = roomType;
-        this.orderDate = orderDate;
-        this.orderDays = orderDays;
+    public Order(Integer orderId, Integer orderStatus) {
+        this.orderId = orderId;
         this.orderStatus = orderStatus;
-        this.orderCost = orderCost;
     }
-    public Order(String orderType, int userId, String phone,String roomType,Integer orderDays, Integer orderStatus, Double orderCost) {
-        this.userId = userId;
-        this.phone = phone;
-        this.orderType = orderType;
-        this.roomType = roomType;
-        this.orderDays = orderDays;
-        this.orderStatus = orderStatus;
-        this.orderCost = orderCost;
-    }
+
 
     @Override
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
+                ", orderTypeId=" + orderTypeId +
                 ", orderType='" + orderType + '\'' +
                 ", userId=" + userId +
+                ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
+                ", roomTypeId=" + roomTypeId +
                 ", roomType='" + roomType + '\'' +
                 ", orderDate=" + orderDate +
                 ", orderDays=" + orderDays +
