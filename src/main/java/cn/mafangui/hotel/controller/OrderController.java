@@ -6,6 +6,7 @@ import cn.mafangui.hotel.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -85,6 +86,16 @@ public class OrderController {
         Order order = new Order(orderTypeId,orderType,userId,name,phone,roomTypeId,
                 roomType,orderDate,orderDays, OrderStatus.UNPAID.getCode(),orderCost);
         return orderService.update(order);
+    }
+
+    /**
+     * 订单支付
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/pay")
+    public int payOrder(int orderId){
+        return orderService.payOrder(orderId);
     }
 
     /**

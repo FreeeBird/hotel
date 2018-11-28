@@ -14,37 +14,50 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    room_id, room_number, type_id, room_type, room_price, room_discount, room_status, 
+    room_id, room_number, type_id, room_type, room_price, room_discount, room_status,
     remark, create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from room_info
     where room_id = #{roomId,jdbcType=INTEGER}
   </select>
   <select id="selectByType" parameterType="Integer" resultMap="BaseResultMap">
-    select * from room_info
+    select
+    <include refid="Base_Column_List" />
+     from room_info
     where type_id = #{typeId,jdbcType=INTEGER}
   </select>
   <select id="selectByStatus" parameterType="Integer" resultMap="BaseResultMap">
-    select * from room_info
+    select
+    <include refid="Base_Column_List" />
+     from room_info
     where room_status = #{roomStatus,jdbcType=INTEGER}
   </select>
+  <select id="randomSelectByTypeAndStatus" parameterType="Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+     from room_info
+    where type_id = #{typeId,jdbcType=INTEGER} and room_status = #{roomStatus,jdbcType=INTEGER}
+    ORDER BY RAND() LIMIT 1
+  </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select * from room_info
+    select
+    <include refid="Base_Column_List" />
+     from room_info
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from room_info
     where room_id = #{roomId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.mafangui.hotel.entity.Room">
-    insert into room_info (room_id, room_number, type_id, 
-      room_type, room_price, room_discount, 
-      room_status, remark, create_time, 
+    insert into room_info (room_id, room_number, type_id,
+      room_type, room_price, room_discount,
+      room_status, remark, create_time,
       update_time)
-    values (#{roomId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
-      #{roomType,jdbcType=VARCHAR}, #{roomPrice,jdbcType=DOUBLE}, #{roomDiscount,jdbcType=DOUBLE}, 
+    values (#{roomId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER},
+      #{roomType,jdbcType=VARCHAR}, #{roomPrice,jdbcType=DOUBLE}, #{roomDiscount,jdbcType=DOUBLE},
       #{roomStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, now(),
       now())
   </insert>

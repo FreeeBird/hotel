@@ -16,6 +16,8 @@ public interface OrderService {
 
     int update(Order record);
 
+    int payOrder(int orderId);
+
     List<Order> selectByUserId(int userId);
 
     List<Order> AllOrders();

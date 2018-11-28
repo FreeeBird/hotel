@@ -94,11 +94,6 @@
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--enableUpdateByExample="false">-->
         <!--</table>-->
-        <!--<table schema="hotel" tableName="department_info"-->
-               <!--domainObjectName="Department" enableCountByExample="false"-->
-               <!--enableDeleteByExample="false" enableSelectByExample="false"-->
-               <!--enableUpdateByExample="false">-->
-        <!--</table>-->
         <!--<table schema="hotel" tableName="check_in"-->
                <!--domainObjectName="CheckIn" enableCountByExample="false"-->
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->

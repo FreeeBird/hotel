@@ -19,4 +19,10 @@ public interface RoomTypeService {
     RoomType selectById(int typeId);
 
     List<RoomType> findAllType();
+
+    int updateRest(int typeId,int num);
+
+    int addRest(int typeId);
+
+    int minusRest(int typeId);
 }

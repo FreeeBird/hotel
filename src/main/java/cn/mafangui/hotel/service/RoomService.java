@@ -13,4 +13,8 @@ public interface RoomService {
     List<Room> selectByStatus(int roomStatus);
     List<Room> selectByType(int typeId);
     List<Room> selectAll();
+
+    int orderRoom(int typeId);
+    int inRoom(int typeId);
+    int outRoom(int typeId);
 }

@@ -1,10 +1,12 @@
 package cn.mafangui.hotel.service.impl;
 
 import cn.mafangui.hotel.entity.Room;
+import cn.mafangui.hotel.enums.RoomStatus;
 import cn.mafangui.hotel.mapper.RoomMapper;
 import cn.mafangui.hotel.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -47,4 +49,30 @@ public class RoomServiceImpl implements RoomService {
     public List<Room> selectAll() {
         return roomMapper.selectAll();
     }
+
+    @Override
+    @Transactional
+    public int orderRoom(int typeId) {
+        Room room = roomMapper.randomSelectByTypeAndStatus(typeId,RoomStatus.AVAILABLE.getCode());
+        if (room == null) return -1;
+        room.setRoomStatus(RoomStatus.ORDERED.getCode());
+        return roomMapper.updateByPrimaryKeySelective(room);
+    }
+
+    @Override
+    public int inRoom(int typeId) {
+        Room room = roomMapper.randomSelectByTypeAndStatus(typeId,RoomStatus.ORDERED.getCode());
+        if (room == null) return -1;
+        room.setRoomStatus(RoomStatus.IN_USE.getCode());
+        return roomMapper.updateByPrimaryKeySelective(room);
+    }
+
+    @Override
+    public int outRoom(int typeId) {
+        Room room = roomMapper.randomSelectByTypeAndStatus(typeId,RoomStatus.IN_USE.getCode());
+        if (room == null) return -1;
+        room.setRoomStatus(RoomStatus.AVAILABLE.getCode());
+        return roomMapper.updateByPrimaryKeySelective(room);
+    }
+
 }

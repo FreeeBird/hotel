@@ -43,4 +43,25 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     public List<RoomType> findAllType() {
         return roomTypeMapper.selectAll();
     }
+
+    @Override
+    public int updateRest(int typeId, int num) {
+        RoomType rt =roomTypeMapper.selectByPrimaryKey(typeId);
+        rt.setTypeId(rt.getRest() + num);
+        return roomTypeMapper.updateByPrimaryKeySelective(rt);
+    }
+
+    @Override
+    public int addRest(int typeId) {
+        RoomType rt =roomTypeMapper.selectByPrimaryKey(typeId);
+        rt.setTypeId(rt.getRest() +1);
+        return roomTypeMapper.updateByPrimaryKeySelective(rt);
+    }
+
+    @Override
+    public int minusRest(int typeId) {
+        RoomType rt =roomTypeMapper.selectByPrimaryKey(typeId);
+        rt.setTypeId(rt.getRest() -1);
+        return roomTypeMapper.updateByPrimaryKeySelective(rt);
+    }
 }

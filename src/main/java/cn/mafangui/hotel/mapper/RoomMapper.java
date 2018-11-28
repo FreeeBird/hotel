@@ -23,4 +23,6 @@ public interface RoomMapper {
     List<Room> selectByStatus(Integer roomStatus);
 
     List<Room> selectAll();
+
+    Room randomSelectByTypeAndStatus(Integer typeId,Integer roomStatus);
 }
