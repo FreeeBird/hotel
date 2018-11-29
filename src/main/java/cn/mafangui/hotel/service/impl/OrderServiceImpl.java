@@ -13,6 +13,7 @@ import cn.mafangui.hotel.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.util.List;
 
@@ -63,9 +64,23 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public int payOrder(int orderId) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
-        if (order == null | order.getOrderStatus() != OrderStatus.UNPAID.getCode()) return -3;
-        if (roomTypeService.updateRest(order.getRoomTypeId(),-1) != 1) return -2;
-        return roomService.orderRoom(order.getRoomTypeId());
+        if (order == null | order.getOrderStatus() != OrderStatus.UNPAID.getCode()) {
+            return -3;
+        }
+        if (roomTypeService.updateRest(order.getRoomTypeId(),-1) != 1){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -2;
+        }
+        if (roomService.orderRoom(order.getRoomTypeId()) != 1){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -1;
+        }
+        order.setOrderStatus(OrderStatus.PAID.getCode());
+        if (orderMapper.updateByPrimaryKeySelective(order) != 1){
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return 0;
+        }
+        return 1;
     }
 
     @Override
