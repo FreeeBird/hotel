@@ -127,6 +127,11 @@ public class UserController {
         return result;
     }
 
+    /**
+     * 根据username查找用户
+     * @param username
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/withUsername")
     public User getByUsername(String username){
         User user = userService.selectByUsername(username);
@@ -134,11 +139,21 @@ public class UserController {
         return user;
     }
 
+    /**
+     * 根据id查找用户
+     * @param userId
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/withId")
     public User getById(int userId){
         return userService.selectById(userId);
     }
 
+    /**
+     * 删除用户
+     * @param userId
+     * @return
+     */
     @RequestMapping(value = "/delete")
     public int deleteUser(int userId){
         return userService.deleteUser(userId);

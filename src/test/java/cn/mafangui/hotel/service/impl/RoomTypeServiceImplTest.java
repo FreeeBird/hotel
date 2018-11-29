@@ -44,12 +44,10 @@ public class RoomTypeServiceImplTest {
 
     @Test
     public void update() {
-        String typeName = "single";
-        int id = 1;
-        RoomType roomType = new RoomType();
-        roomType.setTypeId(id);
-        roomType.setRoomType(typeName);
-        Assert.assertEquals(1,roomTypeService.update(roomType));
+        RoomType rt =roomTypeService.selectById(2);
+        rt.setRest(rt.getRest() -1);
+        System.out.println(rt);
+        System.out.println(roomTypeService.update(rt));
     }
 
     @Test

@@ -26,10 +26,20 @@
     where type_id = #{typeId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select * from room_type
+    select
+    <include refid="Base_Column_List" />
+    from room_type
+  </select>
+  <select id="selectAllWithRest" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_type where rest > 0
   </select>
   <select id="selectByRoomType" parameterType="String" resultMap="BaseResultMap">
-    select * from room_type where room_type = #{roomType,jdbcType=VARCHAR}
+    select
+    <include refid="Base_Column_List" />
+    from room_type
+    where room_type = #{roomType,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from room_type

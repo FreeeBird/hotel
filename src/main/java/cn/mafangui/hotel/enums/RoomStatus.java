@@ -27,5 +27,7 @@ public enum RoomStatus {
 
 
     RoomStatus(int code,String status) {
+        this.code = code;
+        this.status = status;
     }
 }

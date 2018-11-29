@@ -25,6 +25,8 @@ public enum Role {
     }
 
     Role(String value, String role) {
+        this.value = value;
+        this.role = role;
     }
 
 }

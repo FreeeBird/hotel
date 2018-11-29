@@ -38,7 +38,7 @@
   <select id="randomSelectByTypeAndStatus" parameterType="Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-     from room_info
+    from room_info
     where type_id = #{typeId,jdbcType=INTEGER} and room_status = #{roomStatus,jdbcType=INTEGER}
     ORDER BY RAND() LIMIT 1
   </select>

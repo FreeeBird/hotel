@@ -22,4 +22,6 @@ public interface RoomTypeMapper {
     List<RoomType> selectAll();
 
     RoomType selectByRoomType(String roomType);
+
+    List<RoomType> selectAllWithRest();
 }

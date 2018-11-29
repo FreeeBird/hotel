@@ -1,6 +1,7 @@
 package cn.mafangui.hotel.mapper;
 
 import cn.mafangui.hotel.entity.Room;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,5 +25,5 @@ public interface RoomMapper {
 
     List<Room> selectAll();
 
-    Room randomSelectByTypeAndStatus(Integer typeId,Integer roomStatus);
+    Room randomSelectByTypeAndStatus(@Param("typeId") Integer typeId,@Param("roomStatus") Integer roomStatus);
 }

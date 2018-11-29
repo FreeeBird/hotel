@@ -29,5 +29,7 @@ public enum OrderStatus {
     }
 
     OrderStatus(int code, String status) {
+        this.code = code;
+        this.status = status;
     }
 }

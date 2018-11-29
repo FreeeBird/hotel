@@ -53,9 +53,9 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 订单支付
-     *  1.更改订单状态
-     *  2.修改房型余量
-     *  3.修改房间状态
+     *  1.更改订单状态 -3
+     *  2.修改房型余量 -2
+     *  3.修改房间状态 -1
      * @param orderId
      * @return
      */
@@ -63,8 +63,8 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public int payOrder(int orderId) {
         Order order = orderMapper.selectByPrimaryKey(orderId);
-        if (order == null | order.getOrderStatus() != OrderStatus.UNPAID.getCode()) return -1;
-        if (roomTypeService.updateRest(order.getRoomTypeId(),-1) != 1) return -1;
+        if (order == null | order.getOrderStatus() != OrderStatus.UNPAID.getCode()) return -3;
+        if (roomTypeService.updateRest(order.getRoomTypeId(),-1) != 1) return -2;
         return roomService.orderRoom(order.getRoomTypeId());
     }
 

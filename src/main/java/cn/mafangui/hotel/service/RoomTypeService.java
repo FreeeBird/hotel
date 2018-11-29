@@ -25,4 +25,6 @@ public interface RoomTypeService {
     int addRest(int typeId);
 
     int minusRest(int typeId);
+
+    List<RoomType> findAllRestType();
 }

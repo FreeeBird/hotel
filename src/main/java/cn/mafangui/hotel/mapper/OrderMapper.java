@@ -1,6 +1,7 @@
 package cn.mafangui.hotel.mapper;
 
 import cn.mafangui.hotel.entity.Order;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public interface OrderMapper {
 
     List<Order> selectByUserId(Integer userId);
 
-    List<Order> selectAllByUser(Integer userId,Integer orderStatus);
+    List<Order> selectAllByUser(@Param("userId") Integer userId,@Param("orderStatus") Integer orderStatus);
 
 
 }

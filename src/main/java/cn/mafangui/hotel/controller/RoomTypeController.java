@@ -17,17 +17,38 @@ public class RoomTypeController {
     private RoomTypeService roomTypeService;
 
 
+    /**
+     * 所有房型
+     * @return
+     */
     @RequestMapping(value = "/all")
     public List<RoomType> getAllRoomType(){
         return roomTypeService.findAllType();
     }
 
+    /**
+     * 根据id查找房型
+     * @param typeId
+     * @return
+     */
     @RequestMapping(value = "/withId")
     public RoomType getById(int typeId){
         return roomTypeService.selectById(typeId);
     }
 
 
+    /**
+     * 添加房型
+     * @param roomType
+     * @param price
+     * @param discount
+     * @param area
+     * @param bedNum
+     * @param bedSize
+     * @param window
+     * @param remark
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/add")
     public int addRoomType(String roomType,Double price,Double discount,int area,
                            int bedNum,String bedSize,int window,String remark){
@@ -38,6 +59,20 @@ public class RoomTypeController {
         return result;
     }
 
+    /**
+     * 修改房型
+     * @param typeId
+     * @param roomType
+     * @param price
+     * @param discount
+     * @param area
+     * @param bedNum
+     * @param bedSize
+     * @param window
+     * @param rest
+     * @param remark
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/update")
     public int updateRoomType(int typeId,String roomType,Double price,Double discount,int area,
                            int bedNum,String bedSize,int window,int rest,String remark){
@@ -49,11 +84,25 @@ public class RoomTypeController {
         return result;
     }
 
+    /**
+     * 删除房型
+     * @param typeId
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST,value = "/delete")
     public int deleteRoomType(int typeId){
         int result = 0;
         result = roomTypeService.delete(typeId);
         return result;
+    }
+
+    /**
+     * 查找有余量的房型
+     * @return
+     */
+    @RequestMapping(value = "/restAll")
+    public List<RoomType> findAllRestRoomType(){
+        return roomTypeService.findAllRestType();
     }
 
 }
