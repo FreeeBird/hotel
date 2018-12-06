@@ -9,6 +9,8 @@ public interface UserService {
 
     User selectById(int userId);
 
+    int addUser(User user);
+
     int insertUser(User user);
 
     int deleteUser(int userId);

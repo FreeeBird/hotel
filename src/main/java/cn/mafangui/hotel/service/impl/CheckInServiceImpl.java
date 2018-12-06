@@ -1,6 +1,7 @@
 package cn.mafangui.hotel.service.impl;
 
 import cn.mafangui.hotel.entity.CheckIn;
+import cn.mafangui.hotel.entity.Room;
 import cn.mafangui.hotel.mapper.CheckInMapper;
 import cn.mafangui.hotel.service.CheckInService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,11 @@ public class CheckInServiceImpl implements CheckInService {
     @Override
     public int update(CheckIn checkIn) {
         return checkInMapper.updateByPrimaryKeySelective(checkIn);
+    }
+
+    @Override
+    public int checkOut(String roomNumber) {
+        return 0;
     }
 
     @Override

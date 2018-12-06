@@ -53,6 +53,25 @@ public class UserController {
     }
 
     /**
+     * 用户添加
+     * @param username
+     * @param password
+     * @param name
+     * @param gender
+     * @param phone
+     * @param email
+     * @param address
+     * @param idcard
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/add")
+    public int userAdd(String username,String password,String name,String gender,String phone,String email,String address,String idcard){
+        User user = new User(username,password,name,gender,phone,email,address,idcard);
+        return userService.addUser(user);
+    }
+
+
+    /**
      * 更新用户信息
      * @param userId
      * @param name

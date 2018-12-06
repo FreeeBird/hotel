@@ -71,16 +71,30 @@ public class OrderServiceImpl implements OrderService {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return -2;
         }
-        if (roomService.orderRoom(order.getRoomTypeId()) != 1){
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return -1;
-        }
         order.setOrderStatus(OrderStatus.PAID.getCode());
         if (orderMapper.updateByPrimaryKeySelective(order) != 1){
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return 0;
         }
         return 1;
+    }
+
+    /**
+     * 取消订单
+     * 1. 更改订单状态 -3
+     * 2. 修改房型余量（已付款）-2
+     * @param orderId
+     * @return
+     */
+    @Override
+    public int cancelOrder(int orderId) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        if (order == null ) return -3;
+        order.setOrderStatus(OrderStatus.WAS_CANCELED.getCode());
+        if (roomTypeService.updateRest(order.getRoomTypeId(),1) != 1){
+            return -2;
+        }
+        return orderMapper.updateByPrimaryKeySelective(order);
     }
 
     @Override

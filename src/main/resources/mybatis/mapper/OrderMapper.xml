@@ -27,6 +27,11 @@
     from order_info
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_info
+  </select>
   <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

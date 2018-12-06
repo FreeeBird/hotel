@@ -12,6 +12,8 @@ public interface CheckInService {
 
     int update(CheckIn checkIn);
 
+    int checkOut(String roomNumber);
+
     int updateByRoomNumber(String roomNumber);
 
     CheckIn selectById(int checkInId);

@@ -105,8 +105,7 @@ public class OrderController {
      */
     @RequestMapping(value = "/cancel")
     public int cancelOrder(int orderId){
-        Order order = new Order(orderId,OrderStatus.WAS_CANCELED.getCode());
-        return orderService.update(order);
+        return orderService.cancelOrder(orderId);
     }
 
     /**

@@ -18,6 +18,8 @@ public interface OrderService {
 
     int payOrder(int orderId);
 
+    int cancelOrder(int orderId);
+
     List<Order> selectByUserId(int userId);
 
     List<Order> AllOrders();

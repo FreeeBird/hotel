@@ -20,13 +20,20 @@ public class CheckInController {
         this.checkInService = checkInService;
     }
 
-    @RequestMapping(value = "/add")
-    public int addCheckIn(int peo_count, String persons, String ids){
+    /**
+     * 入住登记
+     * @param peo_count
+     * @param persons
+     * @param ids
+     * @return
+     */
+    @RequestMapping(value = "/in")
+    public int addCheckIn(int orderId, int peo_count, String persons, String ids){
         CheckIn checkIn = new CheckIn();
+        checkIn.setOrderId(orderId);
         checkIn.setPeoCount(peo_count);
         checkIn.setPersons(persons);
         checkIn.setIds(ids);
-        checkIn.setCheckInTime(new Date());
         return checkInService.insert(checkIn);
     }
 
@@ -43,7 +50,7 @@ public class CheckInController {
         return checkInService.update(checkIn);
     }
 
-    @RequestMapping(value = "/checkOut")
+    @RequestMapping(value = "/out")
     public int checkOut(String roomNumber){
         return checkInService.updateByRoomNumber(roomNumber);
     }
