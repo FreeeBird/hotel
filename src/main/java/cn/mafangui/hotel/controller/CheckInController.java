@@ -22,20 +22,32 @@ public class CheckInController {
 
     /**
      * 入住登记
-     * @param peo_count
+     * @param peoCount
      * @param persons
      * @param ids
      * @return
      */
     @RequestMapping(value = "/in")
-    public int addCheckIn(int orderId, int peo_count, String persons, String ids){
+    public int addCheckIn(int orderId, int peoCount, String persons, String ids){
         CheckIn checkIn = new CheckIn();
         checkIn.setOrderId(orderId);
-        checkIn.setPeoCount(peo_count);
+        checkIn.setPeoCount(peoCount);
         checkIn.setPersons(persons);
         checkIn.setIds(ids);
-        return checkInService.insert(checkIn);
+        return checkInService.checkIn(checkIn);
     }
+
+    /**
+     * 退房登记
+     *
+     * @param roomNumber
+     * @return
+     */
+    @RequestMapping(value = "/out")
+    public int checkOut(String roomNumber){
+        return checkInService.updateByRoomNumber(roomNumber);
+    }
+
 
     @RequestMapping(value = "/delete")
     public int deleteCheckIn(int checkId){
@@ -50,10 +62,7 @@ public class CheckInController {
         return checkInService.update(checkIn);
     }
 
-    @RequestMapping(value = "/out")
-    public int checkOut(String roomNumber){
-        return checkInService.updateByRoomNumber(roomNumber);
-    }
+
 
     @RequestMapping(value = "/withId")
     public CheckIn getById(int checkId){

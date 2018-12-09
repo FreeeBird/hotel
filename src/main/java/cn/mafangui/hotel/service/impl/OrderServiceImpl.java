@@ -48,6 +48,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order selectByNameAndPhone(String name, String phone) {
+        Order order = new Order();
+        order.setName(name);
+        order.setPhone(phone);
+        return orderMapper.selectByNameAndPhone(order);
+    }
+
+    @Override
     public int update(Order order) {
         return orderMapper.updateByPrimaryKeySelective(order);
     }

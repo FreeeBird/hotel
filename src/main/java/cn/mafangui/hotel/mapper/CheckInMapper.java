@@ -15,6 +15,8 @@ public interface CheckInMapper {
 
     CheckIn selectByPrimaryKey(Integer checkInId);
 
+    CheckIn selectByRoomNumber(String roomNumber);
+
     int updateByRoomNumber(String roomNumber);
 
     int updateByPrimaryKeySelective(CheckIn record);

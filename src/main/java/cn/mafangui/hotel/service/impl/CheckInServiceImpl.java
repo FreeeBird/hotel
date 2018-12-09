@@ -1,11 +1,18 @@
 package cn.mafangui.hotel.service.impl;
 
 import cn.mafangui.hotel.entity.CheckIn;
+import cn.mafangui.hotel.entity.Order;
 import cn.mafangui.hotel.entity.Room;
+import cn.mafangui.hotel.entity.RoomType;
+import cn.mafangui.hotel.enums.OrderStatus;
 import cn.mafangui.hotel.mapper.CheckInMapper;
 import cn.mafangui.hotel.service.CheckInService;
+import cn.mafangui.hotel.service.OrderService;
+import cn.mafangui.hotel.service.RoomService;
+import cn.mafangui.hotel.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,11 +20,55 @@ import java.util.List;
 public class CheckInServiceImpl implements CheckInService {
     @Autowired
     private CheckInMapper checkInMapper;
-
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private RoomTypeService roomTypeService;
+    @Autowired
+    private RoomService roomService;
 
     @Override
     public int insert(CheckIn checkIn) {
         return checkInMapper.insert(checkIn);
+    }
+
+    /**
+     * 入住登记
+     * @param checkIn
+     * 1.获取订单
+     * 2.获取房间类型
+     * 3.获取房间
+     * @return
+     */
+    @Override
+    @Transactional
+    public int checkIn(CheckIn checkIn) {
+        Order order = orderService.selectById(checkIn.getOrderId());
+        RoomType rt = roomTypeService.selectById(order.getRoomTypeId());
+        Room r=roomService.selectById(roomService.inRoom(order.getRoomTypeId()));
+        if (r == null) return -3;
+        checkIn.setRoomId(r.getRoomId());
+        checkIn.setRoomNumber(r.getRoomNumber());
+        if (roomTypeService.updateRest(rt.getTypeId(),-1) <= 0) return -2;
+        order.setOrderStatus(OrderStatus.CHECK_IN.getCode());
+        if (orderService.update(order) <=0 ) return -1;
+        return checkInMapper.insert(checkIn);
+    }
+
+    /**
+     * 退房登记
+     * 1.获取房间
+     * 2.获取房型
+     * 3.获取checkIn
+     * @param roomNumber
+     * @return
+     */
+    @Override
+    public int checkOut(String  roomNumber) {
+        Room r = roomService.selectByNumber(roomNumber);
+        RoomType ty = roomTypeService.selectById(r.getTypeId());
+        CheckIn checkIn = checkInMapper.selectByPrimaryKey(1);
+        return 0;
     }
 
     @Override
@@ -30,10 +81,7 @@ public class CheckInServiceImpl implements CheckInService {
         return checkInMapper.updateByPrimaryKeySelective(checkIn);
     }
 
-    @Override
-    public int checkOut(String roomNumber) {
-        return 0;
-    }
+
 
     @Override
     public int updateByRoomNumber(String roomNumber) {

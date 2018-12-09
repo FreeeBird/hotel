@@ -32,6 +32,11 @@
     <include refid="Base_Column_List" />
     from order_info
   </select>
+  <select id="selectByNameAndPhone" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+  from order_info where name = #{name,jdbcType=VARCHAR} and phone = #{phone,jdbcType=VARCHAR}
+  </select>
   <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

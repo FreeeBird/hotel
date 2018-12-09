@@ -36,6 +36,11 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public Room selectByNumber(String roomNumber) {
+        return roomMapper.selectByNumber(roomNumber);
+    }
+
+    @Override
     public List<Room> selectByStatus(int roomStatus) {
         return roomMapper.selectByStatus(roomStatus);
     }
@@ -59,12 +64,19 @@ public class RoomServiceImpl implements RoomService {
         return roomMapper.updateByPrimaryKeySelective(room);
     }
 
+    /**
+     * 房间入住
+     * @param typeId
+     * @return
+     */
     @Override
     public int inRoom(int typeId) {
-        Room room = roomMapper.randomSelectByTypeAndStatus(typeId,RoomStatus.ORDERED.getCode());
-        if (room == null) return -1;
+        Room room = roomMapper.randomSelectByTypeAndStatus(typeId,RoomStatus.AVAILABLE.getCode());
+        System.out.println(room);
         room.setRoomStatus(RoomStatus.IN_USE.getCode());
-        return roomMapper.updateByPrimaryKeySelective(room);
+        if (roomMapper.updateByPrimaryKeySelective(room) <= 0)
+            return -1;
+        else return room.getRoomId();
     }
 
     @Override

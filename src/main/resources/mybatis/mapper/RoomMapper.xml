@@ -23,6 +23,12 @@
     from room_info
     where room_id = #{roomId,jdbcType=INTEGER}
   </select>
+  <select id="selectByNumber" parameterType="String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from room_info
+    where room_number = #{roomNumber,jdbcType=VARCHAR}
+  </select>
   <select id="selectByType" parameterType="Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

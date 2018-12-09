@@ -10,6 +10,7 @@ public interface RoomService {
     int delete(int roomId);
     int update(Room room);
     Room selectById(int roomId);
+    Room selectByNumber(String roomNumber);
     List<Room> selectByStatus(int roomStatus);
     List<Room> selectByType(int typeId);
     List<Room> selectAll();

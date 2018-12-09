@@ -14,6 +14,8 @@ public interface OrderService {
 
     Order selectById(Integer orderId);
 
+    Order selectByNameAndPhone(String name,String phone);
+
     int update(Order record);
 
     int payOrder(int orderId);

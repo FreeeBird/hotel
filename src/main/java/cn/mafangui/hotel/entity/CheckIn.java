@@ -7,6 +7,8 @@ public class CheckIn {
 
     private Integer orderId;
 
+    private Integer roomId;
+
     private String roomNumber;
 
     private Integer peoCount;
@@ -55,6 +57,13 @@ public class CheckIn {
         this.roomNumber = roomNumber == null ? null : roomNumber.trim();
     }
 
+    public Integer getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
+    }
 
     public Integer getPeoCount() {
         return peoCount;
@@ -107,7 +116,8 @@ public class CheckIn {
     public CheckIn() {
     }
 
-    public CheckIn(String roomNumber, String roomType, Integer peoCount, String persons, String ids, Date checkInTime) {
+    public CheckIn(Integer roomId,String roomNumber, Integer peoCount, String persons, String ids, Date checkInTime) {
+        this.roomId = roomId;
         this.roomNumber = roomNumber;
         this.peoCount = peoCount;
         this.persons = persons;

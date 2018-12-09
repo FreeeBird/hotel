@@ -159,4 +159,15 @@ public class OrderController {
         return orderService.selectById(orderId);
     }
 
+    /**
+     * 根据姓名、预留手机号查找订单
+     * 主要用于客户入住
+     * @param name
+     * @param phone
+     * @return
+     */
+    @RequestMapping(value = "/withNameAndPhone")
+    public Order getByNameAndPhone(String name,String phone){
+        return orderService.selectByNameAndPhone(name,phone);
+    }
 }

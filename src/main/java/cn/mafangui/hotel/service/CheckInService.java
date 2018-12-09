@@ -8,6 +8,8 @@ public interface CheckInService {
 
     int insert(CheckIn checkIn);
 
+    int checkIn(CheckIn checkIn);
+
     int delete(int checkInId);
 
     int update(CheckIn checkIn);

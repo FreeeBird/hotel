@@ -9,18 +9,17 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="gender" jdbcType="CHAR" property="gender" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="department" jdbcType="INTEGER" property="department" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    worker_id, role, username, password, name, gender, phone, department, email, address, 
+    worker_id, role, username, password, name, gender, phone, email, address,
     create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from worker_info
     where worker_id = #{workerId,jdbcType=INTEGER}
@@ -47,14 +46,14 @@
     where worker_id = #{workerId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="cn.mafangui.hotel.entity.Worker">
-    insert into worker_info (worker_id, role, username, 
-      password, name, gender, 
-      phone, department, email, 
+    insert into worker_info (worker_id, role, username,
+      password, name, gender,
+      phone,, email,
       address, create_time, update_time
       )
-    values (#{workerId,jdbcType=INTEGER}, #{role,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{department,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, 
+    values (#{workerId,jdbcType=INTEGER}, #{role,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
+      #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR},
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
       #{address,jdbcType=VARCHAR}, now(),now()
       )
   </insert>
@@ -81,9 +80,6 @@
       </if>
       <if test="phone != null">
         phone,
-      </if>
-      <if test="department != null">
-        department,
       </if>
       <if test="email != null">
         email,
@@ -116,9 +112,6 @@
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        #{department,jdbcType=INTEGER},
-      </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
       </if>
@@ -150,9 +143,6 @@
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="department != null">
-        department = #{department,jdbcType=INTEGER},
-      </if>
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
@@ -170,7 +160,6 @@
       name = #{name,jdbcType=VARCHAR},
       gender = #{gender,jdbcType=CHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      department = #{department,jdbcType=INTEGER},
       email = #{email,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
     where worker_id = #{workerId,jdbcType=INTEGER}
