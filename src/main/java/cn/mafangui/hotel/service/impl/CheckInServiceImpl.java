@@ -5,6 +5,7 @@ import cn.mafangui.hotel.entity.Order;
 import cn.mafangui.hotel.entity.Room;
 import cn.mafangui.hotel.entity.RoomType;
 import cn.mafangui.hotel.enums.OrderStatus;
+import cn.mafangui.hotel.enums.RoomStatus;
 import cn.mafangui.hotel.mapper.CheckInMapper;
 import cn.mafangui.hotel.service.CheckInService;
 import cn.mafangui.hotel.service.OrderService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -67,8 +69,11 @@ public class CheckInServiceImpl implements CheckInService {
     public int checkOut(String  roomNumber) {
         Room r = roomService.selectByNumber(roomNumber);
         RoomType ty = roomTypeService.selectById(r.getTypeId());
-        CheckIn checkIn = checkInMapper.selectByPrimaryKey(1);
-        return 0;
+        CheckIn checkIn = checkInMapper.selectLatestByRoomNumber(roomNumber);
+        r.setRoomStatus(RoomStatus.AVAILABLE.getCode());
+        if(roomService.update(r) <=0 )return -3;
+        if (roomTypeService.updateRest(ty.getTypeId(),1)<=0)return -2;
+        return checkInMapper.checkOut(checkIn.getCheckInId());
     }
 
     @Override

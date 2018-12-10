@@ -23,11 +23,11 @@
     from check_in
     where check_in_id = #{checkInId,jdbcType=INTEGER}
   </select>
-  <select id="selectByRoomNumber" parameterType="String" resultMap="BaseResultMap">
+  <select id="selectLatestByRoomNumber" parameterType="String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from check_in
-    where room_number = #{roomNumber,jdbcType=VARCHAR}
+    where room_number = #{roomNumber,jdbcType=VARCHAR} order by check_in_time desc limit 1
   </select>
   <select id="selectAll"  resultMap="BaseResultMap">
     select
@@ -45,8 +45,7 @@
       update_time)
     values (#{checkInId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},#{roomId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR},
        #{peoCount,jdbcType=INTEGER}, #{persons,jdbcType=VARCHAR},
-      #{ids,jdbcType=VARCHAR}, #{checkInTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP},
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{ids,jdbcType=VARCHAR}, #{checkInTime,jdbcType=TIMESTAMP}, now(),now())
   </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.CheckIn">
     insert into check_in
@@ -130,6 +129,13 @@
       </if>
         update_time = now(),
     </set>
+    where check_in_id = #{checkInId,jdbcType=INTEGER}
+  </update>
+  <update id="checkOut" parameterType="Integer">
+    update check_in
+    set
+      check_out_time = now(),
+      update_time = now()
     where check_in_id = #{checkInId,jdbcType=INTEGER}
   </update>
   <update id="updateByRoomNumber" parameterType="String">
