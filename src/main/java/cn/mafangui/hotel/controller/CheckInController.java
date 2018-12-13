@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -28,7 +29,7 @@ public class CheckInController {
      * @return
      */
     @RequestMapping(value = "/in")
-    public int addCheckIn(int orderId, int peoCount, String persons, String ids){
+    public HashMap addCheckIn(int orderId, int peoCount, String persons, String ids){
         CheckIn checkIn = new CheckIn();
         checkIn.setOrderId(orderId);
         checkIn.setPeoCount(peoCount);
@@ -44,8 +45,13 @@ public class CheckInController {
      * @return
      */
     @RequestMapping(value = "/out")
-    public int checkOut(String roomNumber){
-        return checkInService.updateByRoomNumber(roomNumber);
+    public int checkOut(String roomNumber) {
+        try {
+            return checkInService.checkOut(roomNumber);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 
 

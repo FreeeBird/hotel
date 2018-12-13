@@ -128,19 +128,19 @@ public class RandomCreation {
         return map;
     }
 
-    public static void main(String[] args) {
-        User user = new User();
-        for (int i = 0; i < 30; i++) {
-            Map m = getAddress();
-            user.setName((String) m.get("name"));
-            user.setUsername((String) m.get("username"));
-            user.setPassword((String) m.get("password"));
-            user.setGender((String) m.get("gender"));
-            user.setPhone((String) m.get("phone"));
-            user.setAddress((String) m.get("road"));
-            user.setEmail((String) m.get("email"));
-            user.setIdcard((String) m.get("idcard"));
-//            userService.insertUser(user);
-        }
-    }
+//    public static void main(String[] args) {
+//        User user = new User();
+//        for (int i = 0; i < 30; i++) {
+//            Map m = getAddress();
+//            user.setName((String) m.get("name"));
+//            user.setUsername((String) m.get("username"));
+//            user.setPassword((String) m.get("password"));
+//            user.setGender((String) m.get("gender"));
+//            user.setPhone((String) m.get("phone"));
+//            user.setAddress((String) m.get("road"));
+//            user.setEmail((String) m.get("email"));
+//            user.setIdcard((String) m.get("idcard"));
+////            userService.insertUser(user);
+//        }
+//    }
 }

@@ -45,7 +45,7 @@
       update_time)
     values (#{checkInId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},#{roomId,jdbcType=INTEGER}, #{roomNumber,jdbcType=VARCHAR},
        #{peoCount,jdbcType=INTEGER}, #{persons,jdbcType=VARCHAR},
-      #{ids,jdbcType=VARCHAR}, #{checkInTime,jdbcType=TIMESTAMP}, now(),now())
+      #{ids,jdbcType=VARCHAR}, now(), now(),now())
   </insert>
   <insert id="insertSelective" parameterType="cn.mafangui.hotel.entity.CheckIn">
     insert into check_in

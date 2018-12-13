@@ -34,6 +34,10 @@
     select * from worker_info
     where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR} and role = #{role,jdbcType=VARCHAR}
   </select>
+  <select id="selectByUsernamePassword" parameterType="String" resultMap="BaseResultMap">
+    select * from worker_info
+    where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
   <select id="selectByRole" parameterType="String" resultMap="BaseResultMap">
     select * from worker_info
     where role = #{role,jdbcType=VARCHAR}

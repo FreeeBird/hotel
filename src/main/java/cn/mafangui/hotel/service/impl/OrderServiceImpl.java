@@ -52,6 +52,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order();
         order.setName(name);
         order.setPhone(phone);
+        order.setOrderStatus(OrderStatus.PAID.getCode());
         return orderMapper.selectByNameAndPhone(order);
     }
 

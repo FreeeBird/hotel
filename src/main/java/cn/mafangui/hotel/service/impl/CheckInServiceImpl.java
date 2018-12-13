@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -44,17 +44,22 @@ public class CheckInServiceImpl implements CheckInService {
      */
     @Override
     @Transactional
-    public int checkIn(CheckIn checkIn) {
+    public HashMap checkIn(CheckIn checkIn) {
+        HashMap resultMap = new HashMap();
+        int code = 0;
         Order order = orderService.selectById(checkIn.getOrderId());
         RoomType rt = roomTypeService.selectById(order.getRoomTypeId());
         Room r=roomService.selectById(roomService.inRoom(order.getRoomTypeId()));
-        if (r == null) return -3;
+        if (r == null) code = -3;
         checkIn.setRoomId(r.getRoomId());
         checkIn.setRoomNumber(r.getRoomNumber());
-        if (roomTypeService.updateRest(rt.getTypeId(),-1) <= 0) return -2;
+        if (roomTypeService.updateRest(rt.getTypeId(),-1) <= 0) code = -2;
         order.setOrderStatus(OrderStatus.CHECK_IN.getCode());
-        if (orderService.update(order) <=0 ) return -1;
-        return checkInMapper.insert(checkIn);
+        if (orderService.update(order) <=0 ) code =  -1;
+        code = checkInMapper.insert(checkIn);
+        resultMap.put("code",code);
+        resultMap.put("room",r);
+        return resultMap;
     }
 
     /**
@@ -66,7 +71,7 @@ public class CheckInServiceImpl implements CheckInService {
      * @return
      */
     @Override
-    public int checkOut(String  roomNumber) {
+    public int checkOut(String  roomNumber) throws Exception{
         Room r = roomService.selectByNumber(roomNumber);
         RoomType ty = roomTypeService.selectById(r.getTypeId());
         CheckIn checkIn = checkInMapper.selectLatestByRoomNumber(roomNumber);
