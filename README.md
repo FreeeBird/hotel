@@ -1,6 +1,10 @@
-# 酒店管理系统
+# 酒店管理系统API
 
 Demo: www.mafangui.cn:8888
+前端页面项目: https://github.com/FreeeBird/hotel_app
+后台管理项目:https://github.com/FreeeBird/hotel-manager
+## 技术工具
+ - SpringBoot
 
 ## 1 背景说明
 
