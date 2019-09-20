@@ -81,7 +81,7 @@ CREATE TABLE
 IF NOT EXISTS `user_info` (
 	`user_id` INT NULL AUTO_INCREMENT COMMENT '用户id',
 	`username` VARCHAR (16) NOT NULL COMMENT '用户名',
-	`password` VARCHAR (16) NOT NULL COMMENT '密码',
+	`password` VARCHAR (256) NOT NULL COMMENT '密码',
 	`name` VARCHAR(16) not NULL COMMENT '姓名',
 	`gender` CHAR(2) not null DEFAULT '男' COMMENT '性别',
 	`phone` VARCHAR (16) NOT NULL COMMENT '手机号码',

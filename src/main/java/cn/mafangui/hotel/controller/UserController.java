@@ -23,7 +23,7 @@ public class UserController {
      */
     @RequestMapping(method = RequestMethod.POST,value = "/login")
     public int userLogin(String username,String password){
-        int result = 0;
+        int result;
         if (username == null | username == "" | password == null | password == ""){
             return -1;
         }
