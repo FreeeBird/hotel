@@ -2,9 +2,11 @@
 
 Demo: [不可用]
 
-前端页面项目(vue): https://github.com/FreeeBird/hotel_app
+前端页面项目(vue): 
+https://github.com/FreeeBird/hotel_app
 
-后台管理项目(vue-admin):https://github.com/FreeeBird/hotel-manager
+后台管理项目(vue-admin):
+https://github.com/FreeeBird/hotel-manager
 
 ## 1 背景说明
 

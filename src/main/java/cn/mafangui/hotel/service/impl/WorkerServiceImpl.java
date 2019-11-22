@@ -3,6 +3,7 @@ package cn.mafangui.hotel.service.impl;
 import cn.mafangui.hotel.entity.Worker;
 import cn.mafangui.hotel.mapper.WorkerMapper;
 import cn.mafangui.hotel.service.WorkerService;
+import cn.mafangui.hotel.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public int insert(Worker worker) {
+        worker.setPassword(MD5Utils.MD5Encode(worker.getPassword()));
         return workerMapper.insertSelective(worker);
     }
 
@@ -51,11 +53,13 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker login(String username, String password,String role) {
-        return workerMapper.selectByUsernameAndPassword(username,password,role);
+        String pass = MD5Utils.MD5Encode(password);
+        return workerMapper.selectByUsernameAndPassword(username,pass,role);
     }
 
     @Override
     public Worker login(String username, String password) {
-        return workerMapper.selectByUsernamePassword(username,password);
+        String pass = MD5Utils.MD5Encode(password);
+        return workerMapper.selectByUsernamePassword(username,pass);
     }
 }

@@ -3,10 +3,13 @@ package cn.mafangui.hotel.controller;
 import cn.mafangui.hotel.entity.User;
 import cn.mafangui.hotel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -22,13 +25,16 @@ public class UserController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST,value = "/login")
-    public int userLogin(String username,String password){
+    public int userLogin(String username, String password, HttpServletRequest request){
         int result;
         if (username == null | username == "" | password == null | password == ""){
             return -1;
         }
         if (userService.selectByUsernameAndPassword(username,password) != null){
             result = 1;
+            HttpSession session = request.getSession();
+            session.setAttribute("userId",username);
+            session.getId();
         }
         else result = 0;
         return result;
