@@ -41,11 +41,13 @@ public class UserOrderController {
      * @return
      */
     @RequestMapping(value = "/add")
-    public int addOrder(int orderTypeId,String orderType, int userId,String name, String phone,int roomTypeId, String roomType,
+    public AjaxResult addOrder(int orderTypeId,String orderType, int userId,String name, String phone,int roomTypeId, String roomType,
                         @DateTimeFormat(pattern = "yyyy-MM-dd") Date orderDate, Integer orderDays, Double orderCost){
         Order order = new Order(orderTypeId,orderType,userId,name,phone,roomTypeId,
                 roomType,orderDate,orderDays, OrderStatus.UNPAID.getCode(),orderCost);
-        return orderService.addOrder(order);
+        if(orderService.addOrder(order)!=1)
+            return ResponseUtil.failed("创建订单失败");
+        return ResponseUtil.success("预订成功");
     }
 
     /**
