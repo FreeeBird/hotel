@@ -1,6 +1,8 @@
 package cn.mafangui.hotel.controller;
 
 import cn.mafangui.hotel.entity.RoomType;
+import cn.mafangui.hotel.response.AjaxResult;
+import cn.mafangui.hotel.response.ResponseUtil;
 import cn.mafangui.hotel.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,9 +23,10 @@ public class RoomTypeController {
      * 所有房型
      * @return
      */
-    @RequestMapping(value = "/all")
-    public List<RoomType> getAllRoomType(){
-        return roomTypeService.findAllType();
+    @RequestMapping(value = "")
+    public AjaxResult getAllRoomType(){
+        List<RoomType> rooms = roomTypeService.findAllType();
+        return ResponseUtil.success(rooms);
     }
 
     /**

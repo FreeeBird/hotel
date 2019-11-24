@@ -1,6 +1,8 @@
 package cn.mafangui.hotel.controller;
 
 import cn.mafangui.hotel.entity.Hotel;
+import cn.mafangui.hotel.response.AjaxResult;
+import cn.mafangui.hotel.response.ResponseUtil;
 import cn.mafangui.hotel.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,8 +44,8 @@ public class HotelController {
         return hotelService.selectByName(hotelName);
     }
 
-    @RequestMapping(value = "/all")
-    public List<Hotel> getAllHotel(){
-        return hotelService.selectAll();
+    @RequestMapping(value = "")
+    public AjaxResult getAllHotel(){
+        return ResponseUtil.success(hotelService.selectAll());
     }
 }

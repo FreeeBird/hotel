@@ -26,7 +26,7 @@ public class LoginController {
 
     @RequestMapping(value = "/user",method = RequestMethod.POST)
     public AjaxResult userLogin(String username, String password,
-                                        HttpServletRequest request){
+                                        HttpServletRequest request) {
         if(StringUtils.isEmpty(username)){
             return ResponseUtil.failed("用户名不能为空");
         }else if(StringUtils.isEmpty(password)) {
@@ -38,7 +38,11 @@ public class LoginController {
         }
         HttpSession session = request.getSession();
         session.setAttribute("userId",user.getUserId());
-        return ResponseUtil.success(session.getId());
+        session.setAttribute("username",user.getUsername());
+        HashMap map = new HashMap<>();
+        map.put("sessionId",session.getId());
+        map.put("userId",user.getUserId());
+        return ResponseUtil.success(map);
     }
 
     @RequestMapping(value = "/worker",method = RequestMethod.POST)

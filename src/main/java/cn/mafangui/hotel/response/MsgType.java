@@ -8,7 +8,8 @@ public enum MsgType {
     SUCCESS(1000,"success"),
     FAILED(1001,"Failure"),
 
-    PARAM_IS_INVALID(1100,"参数非法")
+    PARAM_IS_INVALID(1001,"参数非法"),
+    PERMISSION_DENIED(1002,"权限不足"),
 
     ;
     private Integer code;

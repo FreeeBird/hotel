@@ -1,5 +1,8 @@
 package cn.mafangui.hotel.tool;
 
+import cn.mafangui.hotel.response.AjaxResult;
+import cn.mafangui.hotel.response.ResponseUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,26 +15,35 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("Pre");
         HttpSession session = request.getSession();
-        System.out.println(session.getAttribute("userId"));
-        if(session!=null && session.getAttribute("userId")!=null){
+        if(session.getAttribute("userId") != null){
             return true;
         }else {
+            setCorsMappings(request, response);
             PrintWriter writer = response.getWriter();
-            writer.write("Not Login.");
+            AjaxResult result = ResponseUtil.failed("Not Login");
+            ObjectMapper mapper = new ObjectMapper();
+            writer.write(mapper.writeValueAsString(result));
             return false;
         }
+    }
+
+    private void setCorsMappings(HttpServletRequest request, HttpServletResponse response){
+        String origin = request.getHeader("Origin");
+        response.setHeader("Access-Control-Allow-Origin", origin);
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Authorization");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
     }
 
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-        System.out.println("post");
+
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-        System.out.println("after");
     }
 }

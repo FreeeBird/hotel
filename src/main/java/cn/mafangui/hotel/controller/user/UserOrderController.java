@@ -1,4 +1,4 @@
-package cn.mafangui.hotel.controller;
+package cn.mafangui.hotel.controller.user;
 
 import cn.mafangui.hotel.entity.Order;
 import cn.mafangui.hotel.enums.OrderStatus;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
@@ -18,8 +20,8 @@ import java.util.List;
  * 订单接口
  */
 @RestController
-@RequestMapping(value = "/order")
-public class OrderController {
+@RequestMapping(value = "/user/order")
+public class UserOrderController {
     @Autowired
     private OrderService orderService;
 
@@ -47,24 +49,16 @@ public class OrderController {
     }
 
     /**
-     * 删除订单
-     * @param orderId
-     * @return
-     */
-    @RequestMapping(value = "/delete")
-    public int deleteOrder(int orderId){
-        return orderService.delete(orderId);
-    }
-
-    /**
      * 客户删除订单
      * @param orderId
      * @return
      */
     @RequestMapping(value = "/deleteByUser")
-    public int deleteOrderByUser(int orderId){
+    public AjaxResult deleteOrderByUser(int orderId){
         Order order = new Order(orderId,OrderStatus.WAS_DELETED.getCode());
-        return orderService.update(order);
+        if(orderService.update(order)!=1)
+            return ResponseUtil.failed("删除失败");
+        return ResponseUtil.success("删除成功");
     }
 
     /**
@@ -143,11 +137,12 @@ public class OrderController {
 
     /**
      * 客户查询个人所有订单（不包括被自己删除的）
-     * @param userId
      * @return
      */
-    @RequestMapping(value = "/userOrder")
-    public AjaxResult getAllByUser(int userId){
+    @RequestMapping(value = "")
+    public AjaxResult getAllByUser(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
         return ResponseUtil.success(orderService.UsersAllOrders(userId));
     }
 
