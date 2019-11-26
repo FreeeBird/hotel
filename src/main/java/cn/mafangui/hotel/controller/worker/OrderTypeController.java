@@ -1,4 +1,4 @@
-package cn.mafangui.hotel.controller;
+package cn.mafangui.hotel.controller.worker;
 
 import cn.mafangui.hotel.entity.OrderType;
 import cn.mafangui.hotel.service.OrderTypeService;

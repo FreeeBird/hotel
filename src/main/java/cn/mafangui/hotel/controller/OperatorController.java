@@ -16,12 +16,6 @@ public class OperatorController {
     @Autowired
     private WorkerService workerService;
 
-    @RequestMapping(method = RequestMethod.POST,value = "/login")
-    public int login(String username,String password){
-        if(workerService.login(username,password, Role.OPERATOR.getValue()) != null)
-            return 1;
-        else return 0;
-    }
 
     @RequestMapping(method = RequestMethod.POST,value = "/delete")
     public int deleteOperator(int workerId){

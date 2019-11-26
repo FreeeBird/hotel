@@ -1,4 +1,4 @@
-package cn.mafangui.hotel.controller.user;
+package cn.mafangui.hotel.controller.worker;
 
 import cn.mafangui.hotel.entity.User;
 import cn.mafangui.hotel.response.AjaxResult;
@@ -14,10 +14,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping(value = "/user")
-public class UserController {
+@RequestMapping(value = "/worker/user")
+public class WorkerUserController {
     @Autowired
     private UserService userService;
+
+
+
+    /**
+     * 用户添加
+     * @param username
+     * @param password
+     * @param name
+     * @param gender
+     * @param phone
+     * @param email
+     * @param address
+     * @param idcard
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST,value = "/add")
+    public int userAdd(String username,String password,String name,String gender,String phone,String email,String address,String idcard){
+        User user = new User(username,password,name,gender,phone,email,address,idcard);
+        return userService.addUser(user);
+    }
+
 
     /**
      * 更新用户信息
@@ -31,7 +52,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST,value = "/update")
-    public AjaxResult userUpdate(Integer userId, String name, String gender, String phone,
+    public AjaxResult userUpdate(int userId, String name, String gender, String phone,
                                  String email, String address, String idcard, HttpServletRequest request){
         HttpSession session = request.getSession();
         if (!session.getAttribute("userId").equals(userId)){
@@ -87,6 +108,20 @@ public class UserController {
     }
 
 
+    /**
+     * 根据username查找用户
+     * @param username
+     * @return
+     */
+    @RequestMapping(value = "/withUsername")
+    public AjaxResult getByUsername(String username, HttpServletRequest request){
+        if(!request.getSession().getAttribute("username").equals(username)){
+            return ResponseTool.failed(MsgType.PERMISSION_DENIED);
+        }
+        User user = userService.selectByUsername(username);
+        user.setPassword(null);
+        return ResponseTool.success(user);
+    }
 
     /**
      * 注销

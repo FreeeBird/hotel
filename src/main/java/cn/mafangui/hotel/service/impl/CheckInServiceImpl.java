@@ -44,22 +44,17 @@ public class CheckInServiceImpl implements CheckInService {
      */
     @Override
     @Transactional
-    public HashMap checkIn(CheckIn checkIn) {
-        HashMap resultMap = new HashMap();
-        int code = 0;
+    public Room checkIn(CheckIn checkIn) {
         Order order = orderService.selectById(checkIn.getOrderId());
         RoomType rt = roomTypeService.selectById(order.getRoomTypeId());
-        Room r=roomService.selectById(roomService.inRoom(order.getRoomTypeId()));
-        if (r == null) code = -3;
+        Room r = roomService.selectById(roomService.inRoom(order.getRoomTypeId()));
         checkIn.setRoomId(r.getRoomId());
         checkIn.setRoomNumber(r.getRoomNumber());
-        if (roomTypeService.updateRest(rt.getTypeId(),-1) <= 0) code = -2;
+        roomTypeService.updateRest(rt.getTypeId(),-1);
         order.setOrderStatus(OrderStatus.CHECK_IN.getCode());
-        if (orderService.update(order) <=0 ) code =  -1;
-        code = checkInMapper.insert(checkIn);
-        resultMap.put("code",code);
-        resultMap.put("room",r);
-        return resultMap;
+        orderService.update(order);
+        checkInMapper.insert(checkIn);
+        return r;
     }
 
     /**
@@ -71,7 +66,7 @@ public class CheckInServiceImpl implements CheckInService {
      * @return
      */
     @Override
-    public int checkOut(String  roomNumber) throws Exception{
+    public int checkOut(String  roomNumber){
         Room r = roomService.selectByNumber(roomNumber);
         RoomType ty = roomTypeService.selectById(r.getTypeId());
         CheckIn checkIn = checkInMapper.selectLatestByRoomNumber(roomNumber);

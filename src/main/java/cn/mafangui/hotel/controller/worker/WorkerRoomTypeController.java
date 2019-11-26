@@ -1,10 +1,11 @@
-package cn.mafangui.hotel.controller;
+package cn.mafangui.hotel.controller.worker;
 
 import cn.mafangui.hotel.entity.RoomType;
 import cn.mafangui.hotel.response.AjaxResult;
-import cn.mafangui.hotel.response.ResponseUtil;
+import cn.mafangui.hotel.response.ResponseTool;
 import cn.mafangui.hotel.service.RoomTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/roomType")
-public class RoomTypeController {
+@RequestMapping(value = "/admin/room_type")
+public class WorkerRoomTypeController {
 
     @Autowired
     private RoomTypeService roomTypeService;
@@ -26,7 +27,16 @@ public class RoomTypeController {
     @RequestMapping(value = "")
     public AjaxResult getAllRoomType(){
         List<RoomType> rooms = roomTypeService.findAllType();
-        return ResponseUtil.success(rooms);
+        return ResponseTool.success(rooms);
+    }
+
+    /**
+     * 查找有余量的房型
+     * @return
+     */
+    @RequestMapping(value = "/rest")
+    public AjaxResult findAllRestRoomType(){
+        return ResponseTool.success(roomTypeService.findAllRestType());
     }
 
     /**
@@ -34,9 +44,9 @@ public class RoomTypeController {
      * @param typeId
      * @return
      */
-    @RequestMapping(value = "/withId")
-    public RoomType getById(int typeId){
-        return roomTypeService.selectById(typeId);
+    @RequestMapping(value = "/{typeId}")
+    public AjaxResult getById(@PathVariable int typeId){
+        return ResponseTool.success(roomTypeService.selectById(typeId));
     }
 
 
@@ -53,13 +63,13 @@ public class RoomTypeController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST,value = "/add")
-    public int addRoomType(String roomType,Double price,Double discount,int area,
-                           int bedNum,String bedSize,int window,String remark){
+    public AjaxResult addRoomType(String roomType,Double price,Double discount,int area,
+                           int bedNum,String bedSize,int window,String remark,int rest){
         RoomType rt = new RoomType(roomType,remark,price,discount,area,bedNum,bedSize,window);
-        rt.setRest(0);
-        int result = 0;
-        result = roomTypeService.insert(rt);
-        return result;
+        rt.setRest(rest);
+        int result = roomTypeService.insert(rt);
+        if(result!=1) return ResponseTool.failed("添加失败");
+        return ResponseTool.success("添加成功");
     }
 
     /**
@@ -77,14 +87,14 @@ public class RoomTypeController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST,value = "/update")
-    public int updateRoomType(int typeId,String roomType,Double price,Double discount,int area,
+    public AjaxResult updateRoomType(int typeId,String roomType,Double price,Double discount,int area,
                            int bedNum,String bedSize,int window,int rest,String remark){
         RoomType rt = new RoomType(roomType,remark,price,discount,area,bedNum,bedSize,window);
         rt.setTypeId(typeId);
         rt.setRest(rest);
-        int result = 0;
-        result = roomTypeService.update(rt);
-        return result;
+        int result = roomTypeService.update(rt);
+        if(result!=1) return ResponseTool.failed("修改失败");
+        return ResponseTool.success("修改成功");
     }
 
     /**
@@ -93,19 +103,12 @@ public class RoomTypeController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST,value = "/delete")
-    public int deleteRoomType(int typeId){
-        int result = 0;
-        result = roomTypeService.delete(typeId);
-        return result;
+    public AjaxResult deleteRoomType(int typeId){
+        int result = roomTypeService.delete(typeId);
+        if(result!=1) return ResponseTool.failed("删除失败");
+        return ResponseTool.success("删除成功");
     }
 
-    /**
-     * 查找有余量的房型
-     * @return
-     */
-    @RequestMapping(value = "/restAll")
-    public List<RoomType> findAllRestRoomType(){
-        return roomTypeService.findAllRestType();
-    }
+
 
 }

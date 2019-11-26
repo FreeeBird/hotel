@@ -1,10 +1,10 @@
-package cn.mafangui.hotel.controller;
+package cn.mafangui.hotel.controller.common;
 
 import cn.mafangui.hotel.entity.User;
 import cn.mafangui.hotel.entity.Worker;
 import cn.mafangui.hotel.enums.Role;
 import cn.mafangui.hotel.response.AjaxResult;
-import cn.mafangui.hotel.response.ResponseUtil;
+import cn.mafangui.hotel.response.ResponseTool;
 import cn.mafangui.hotel.service.UserService;
 import cn.mafangui.hotel.service.WorkerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +26,9 @@ public class RegisterController {
         User user = new User(username,password,name,gender,phone,email,address,idcard);
         int result = userService.insertUser(user);
         if(result==1){
-            return ResponseUtil.success(result);
+            return ResponseTool.success(result);
         }
-        else return ResponseUtil.failed("注册失败,请稍后再试");
+        else return ResponseTool.failed("注册失败,请稍后再试");
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/admin")
@@ -37,9 +37,9 @@ public class RegisterController {
         worker.setRole(Role.ADMIN.getValue());
         int result = workerService.insert(worker);
         if(result==1){
-            return ResponseUtil.success(result);
+            return ResponseTool.success(result);
         }
-        else return ResponseUtil.failed("注册失败,请稍后再试");
+        else return ResponseTool.failed("注册失败,请稍后再试");
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/operator")
@@ -48,9 +48,9 @@ public class RegisterController {
         worker.setRole(Role.OPERATOR.getValue());
         int result = workerService.insert(worker);
         if(result==1){
-            return ResponseUtil.success(result);
+            return ResponseTool.success(result);
         }
-        else return ResponseUtil.failed("注册失败,请稍后再试");
+        else return ResponseTool.failed("注册失败,请稍后再试");
     }
 
 }

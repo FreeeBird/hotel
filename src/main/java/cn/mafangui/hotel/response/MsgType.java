@@ -6,7 +6,7 @@ package cn.mafangui.hotel.response;
  */
 public enum MsgType {
     SUCCESS(1000,"success"),
-    FAILED(1001,"Failure"),
+    FAILED(1001,"failure"),
 
     PARAM_IS_INVALID(1001,"参数非法"),
     PERMISSION_DENIED(1002,"权限不足"),

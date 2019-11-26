@@ -1,7 +1,7 @@
 package cn.mafangui.hotel.tool;
 
 import cn.mafangui.hotel.response.AjaxResult;
-import cn.mafangui.hotel.response.ResponseUtil;
+import cn.mafangui.hotel.response.ResponseTool;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +21,7 @@ public class SessionInterceptor implements HandlerInterceptor {
         }else {
             setCorsMappings(request, response);
             PrintWriter writer = response.getWriter();
-            AjaxResult result = ResponseUtil.failed("Not Login");
+            AjaxResult result = ResponseTool.failed("Not Login");
             ObjectMapper mapper = new ObjectMapper();
             writer.write(mapper.writeValueAsString(result));
             return false;

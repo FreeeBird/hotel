@@ -2,7 +2,7 @@ package cn.mafangui.hotel.tool;
 
 import cn.mafangui.hotel.response.AjaxResult;
 import cn.mafangui.hotel.response.MsgType;
-import cn.mafangui.hotel.response.ResponseUtil;
+import cn.mafangui.hotel.response.ResponseTool;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -20,7 +20,7 @@ public class UserInterceptor implements HandlerInterceptor {
             return true;
         }else {
             PrintWriter writer = response.getWriter();
-            AjaxResult result = ResponseUtil.failed(MsgType.PERMISSION_DENIED);
+            AjaxResult result = ResponseTool.failed(MsgType.PERMISSION_DENIED);
             ObjectMapper mapper = new ObjectMapper();
             writer.write(mapper.writeValueAsString(result));
             return false;

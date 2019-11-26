@@ -3,7 +3,7 @@ package cn.mafangui.hotel.controller;
 import cn.mafangui.hotel.entity.Order;
 import cn.mafangui.hotel.enums.OrderStatus;
 import cn.mafangui.hotel.response.AjaxResult;
-import cn.mafangui.hotel.response.ResponseUtil;
+import cn.mafangui.hotel.response.ResponseTool;
 import cn.mafangui.hotel.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -148,7 +148,7 @@ public class OrderController {
      */
     @RequestMapping(value = "/userOrder")
     public AjaxResult getAllByUser(int userId){
-        return ResponseUtil.success(orderService.UsersAllOrders(userId));
+        return ResponseTool.success(orderService.UsersAllOrders(userId));
     }
 
     /**

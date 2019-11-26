@@ -8,7 +8,7 @@ import cn.mafangui.hotel.response.MsgType;
  *  成功则调用success
  *  失败则调用failed
  */
-public class ResponseUtil {
+public class ResponseTool {
 
     /**
      * 请求成功
@@ -30,5 +30,9 @@ public class ResponseUtil {
 
     public static AjaxResult failed(String  msg){
         return new AjaxResult(MsgType.FAILED.getCode(),msg);
+    }
+
+    public static AjaxResult failed(){
+        return new AjaxResult(MsgType.FAILED.getCode(),"操作失败");
     }
 }
