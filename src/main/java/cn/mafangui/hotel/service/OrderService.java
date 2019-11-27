@@ -22,6 +22,8 @@ public interface OrderService {
 
     int cancelOrder(int orderId);
 
+    Integer getOrderCount();
+
     List<Order> selectByUserId(int userId);
 
     List<Order> AllOrders();

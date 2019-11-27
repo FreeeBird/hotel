@@ -28,6 +28,9 @@
     select * from user_info
     where username != ''
   </select>
+  <select id="getUserCount" resultType="java.lang.Integer">
+    select count(user_id) from user_info
+  </select>
   <select id="selectAll" resultMap="BaseResultMap">
     select * from user_info
   </select>

@@ -18,6 +18,9 @@
     worker_id, role, username, password, name, gender, phone, email, address,
     create_time, update_time
   </sql>
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(worker_id) from worker_info
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

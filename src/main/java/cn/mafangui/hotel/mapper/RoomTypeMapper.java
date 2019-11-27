@@ -7,6 +7,7 @@ import java.util.List;
 
 @Component
 public interface RoomTypeMapper {
+    Integer getCount();
     int deleteByPrimaryKey(Integer typeId);
 
     int insert(RoomType record);

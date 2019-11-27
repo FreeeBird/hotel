@@ -32,6 +32,10 @@
     <include refid="Base_Column_List" />
     from order_info
   </select>
+  <select id="getOrderCount"  resultType="java.lang.Integer">
+    select count(order_id)
+    from order_info
+  </select>
   <select id="selectByNameAndPhone" parameterType="cn.mafangui.hotel.entity.Order" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

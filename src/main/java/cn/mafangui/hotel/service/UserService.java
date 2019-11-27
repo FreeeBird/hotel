@@ -17,6 +17,8 @@ public interface UserService {
 
     int updateUser(User user);
 
+    Integer getUserCount();
+
     User selectByUsernameAndPassword(String username, String password);
 
     User selectByUsername(String username);

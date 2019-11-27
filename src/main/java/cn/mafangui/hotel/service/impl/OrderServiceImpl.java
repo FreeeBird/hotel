@@ -107,6 +107,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Integer getOrderCount() {
+        return orderMapper.getOrderCount();
+    }
+
+    @Override
     public List<Order> selectByUserId(int userId) {
         return orderMapper.selectByUserId(userId);
     }

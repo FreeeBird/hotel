@@ -42,6 +42,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer getUserCount() {
+        return userMapper.getUserCount();
+    }
+
+    @Override
     public User selectByUsernameAndPassword(String username, String password) {
         String pass = MD5Utils.MD5Encode(password);
         return userMapper.selectByUsernameAndPassword(username,pass);

@@ -7,6 +7,7 @@ import java.util.List;
 
 @Component
 public interface CheckInMapper {
+    Integer getCount();
     int deleteByPrimaryKey(Integer checkInId);
 
     int insert(CheckIn record);

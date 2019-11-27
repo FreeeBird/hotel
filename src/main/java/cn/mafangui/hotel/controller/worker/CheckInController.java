@@ -10,19 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/admin/checkIn")
+@RequestMapping(value = "/op/check-in")
 public class CheckInController {
 
     @Autowired
     private CheckInService checkInService;
 
-    /**
-     * 入住登记
-     * @param peoCount
-     * @param persons
-     * @param ids
-     * @return
-     */
     @RequestMapping(value = "/in")
     public AjaxResult addCheckIn(int orderId, int peoCount, String persons, String ids){
         CheckIn checkIn = new CheckIn();
@@ -33,12 +26,6 @@ public class CheckInController {
         return ResponseTool.success(checkInService.checkIn(checkIn));
     }
 
-    /**
-     * 退房登记
-     *
-     * @param roomNumber
-     * @return
-     */
     @RequestMapping(value = "/out")
     public AjaxResult checkOut(String roomNumber) {
         if(checkInService.checkOut(roomNumber)<0)

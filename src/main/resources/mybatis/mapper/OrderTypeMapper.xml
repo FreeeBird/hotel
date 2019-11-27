@@ -11,6 +11,9 @@
   <sql id="Base_Column_List">
     type_id, type, remark, create_time, update_time
   </sql>
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(type_id) from order_type
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -8,6 +8,7 @@ import java.util.List;
 
 @Component
 public interface OrderTypeMapper {
+    Integer getCount();
     int deleteByPrimaryKey(Integer typeId);
 
     int insert(OrderType record);

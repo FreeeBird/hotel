@@ -17,6 +17,9 @@
     room_id, room_number, type_id, room_type, room_price, room_discount, room_status,
     remark, create_time, update_time
   </sql>
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(room_id) from room_info
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

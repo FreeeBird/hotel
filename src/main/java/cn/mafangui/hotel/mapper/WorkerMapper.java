@@ -8,6 +8,7 @@ import java.util.List;
 
 @Component
 public interface WorkerMapper {
+    Integer getCount();
     int deleteByPrimaryKey(Integer workerId);
 
     int insert(Worker record);

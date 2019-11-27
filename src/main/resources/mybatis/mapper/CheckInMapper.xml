@@ -17,6 +17,9 @@
     check_in_id, order_id, room_number,peo_count, persons, ids, check_in_time, check_out_time,
     create_time, update_time
   </sql>
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(check_in_id) from check_in
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

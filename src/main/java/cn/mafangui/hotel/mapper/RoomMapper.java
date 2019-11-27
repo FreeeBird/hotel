@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 @Component
 public interface RoomMapper {
+    Integer getCount();
     int deleteByPrimaryKey(Integer roomId);
 
     int insert(Room record);

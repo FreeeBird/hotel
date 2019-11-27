@@ -8,6 +8,7 @@ import java.util.List;
 
 @Component
 public interface OrderMapper {
+
     int deleteByPrimaryKey(Integer orderId);
 
     int insert(Order record);
@@ -21,6 +22,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    Integer getOrderCount();
 
     List<Order> selectAll();
 
