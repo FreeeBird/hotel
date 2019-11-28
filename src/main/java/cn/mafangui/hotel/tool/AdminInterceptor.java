@@ -1,5 +1,6 @@
 package cn.mafangui.hotel.tool;
 
+import cn.mafangui.hotel.enums.Role;
 import cn.mafangui.hotel.response.AjaxResult;
 import cn.mafangui.hotel.response.MsgType;
 import cn.mafangui.hotel.response.ResponseTool;
@@ -12,17 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 
-public class SessionInterceptor implements HandlerInterceptor {
+public class AdminInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         HttpSession session = request.getSession();
-        if(session.getAttribute("userId") != null){
+        if(session.getAttribute("role").equals(Role.ADMIN.getValue())){
             return true;
         }else {
             setCorsMappings(request, response);
             PrintWriter writer = response.getWriter();
-            AjaxResult result = ResponseTool.failed(MsgType.NOT_LOGIN);
+            AjaxResult result = ResponseTool.failed(MsgType.PERMISSION_DENIED);
             ObjectMapper mapper = new ObjectMapper();
             writer.write(mapper.writeValueAsString(result));
             return false;

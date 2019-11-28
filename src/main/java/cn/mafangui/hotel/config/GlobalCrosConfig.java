@@ -1,5 +1,7 @@
 package cn.mafangui.hotel.config;
 
+import cn.mafangui.hotel.tool.AdminInterceptor;
+import cn.mafangui.hotel.tool.OpInterceptor;
 import cn.mafangui.hotel.tool.SessionInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,6 +41,10 @@ public class GlobalCrosConfig {
                         .excludePathPatterns("/hotel/**")
                         .excludePathPatterns("/login/**")
                         .excludePathPatterns("/register/**");
+                registry.addInterceptor(new OpInterceptor())
+                        .addPathPatterns("/op/**");
+                registry.addInterceptor(new AdminInterceptor())
+                        .addPathPatterns("/admin/**");
             }
         };
     }

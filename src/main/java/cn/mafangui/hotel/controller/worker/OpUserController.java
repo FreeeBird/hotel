@@ -31,10 +31,19 @@ public class OpUserController {
         return ResponseTool.success(userService.getUserCount());
     }
 
+    @RequestMapping(value = "/delete/{userId}")
+    public AjaxResult deleteUser(@PathVariable Integer userId){
+        int re = userService.deleteUser(userId);
+        if(re!=1) return ResponseTool.failed();
+        return ResponseTool.success();
+    }
+
     @RequestMapping(method = RequestMethod.POST,value = "/add")
-    public int userAdd(String username,String password,String name,String gender,String phone,String email,String address,String idcard){
+    public AjaxResult userAdd(String username,String password,String name,String gender,String phone,String email,String address,String idcard){
         User user = new User(username,password,name,gender,phone,email,address,idcard);
-        return userService.addUser(user);
+        int re = userService.addUser(user);
+        if(re!=1) return ResponseTool.failed();
+        return ResponseTool.success();
     }
 
     @RequestMapping(method = RequestMethod.POST,value = "/update")

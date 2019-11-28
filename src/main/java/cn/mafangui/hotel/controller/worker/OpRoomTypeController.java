@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/admin/room_type")
-public class WorkerRoomTypeController {
+@RequestMapping(value = "/op/room-type")
+public class OpRoomTypeController {
 
     @Autowired
     private RoomTypeService roomTypeService;
@@ -63,8 +63,8 @@ public class WorkerRoomTypeController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST,value = "/add")
-    public AjaxResult addRoomType(String roomType,Double price,Double discount,int area,
-                           int bedNum,String bedSize,int window,String remark,int rest){
+    public AjaxResult addRoomType(String roomType,Double price,Double discount,Integer area,
+                           Integer bedNum,String bedSize,Integer window,String remark,Integer rest){
         RoomType rt = new RoomType(roomType,remark,price,discount,area,bedNum,bedSize,window);
         rt.setRest(rest);
         int result = roomTypeService.insert(rt);
@@ -87,8 +87,8 @@ public class WorkerRoomTypeController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST,value = "/update")
-    public AjaxResult updateRoomType(int typeId,String roomType,Double price,Double discount,int area,
-                           int bedNum,String bedSize,int window,int rest,String remark){
+    public AjaxResult updateRoomType(Integer typeId,String roomType,Double price,Double discount,Integer area,
+                                     Integer bedNum,String bedSize,Integer window,Integer rest,String remark){
         RoomType rt = new RoomType(roomType,remark,price,discount,area,bedNum,bedSize,window);
         rt.setTypeId(typeId);
         rt.setRest(rest);
@@ -102,8 +102,8 @@ public class WorkerRoomTypeController {
      * @param typeId
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST,value = "/delete")
-    public AjaxResult deleteRoomType(int typeId){
+    @RequestMapping(method = RequestMethod.POST,value = "/delete/{typeId}")
+    public AjaxResult deleteRoomType(@PathVariable Integer typeId){
         int result = roomTypeService.delete(typeId);
         if(result!=1) return ResponseTool.failed("删除失败");
         return ResponseTool.success("删除成功");

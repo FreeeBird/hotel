@@ -1,8 +1,5 @@
 package cn.mafangui.hotel.response;
 
-import cn.mafangui.hotel.response.AjaxResult;
-import cn.mafangui.hotel.response.MsgType;
-
 /**
  *  接口数据返回工具类
  *  成功则调用success
@@ -17,6 +14,10 @@ public class ResponseTool {
      */
     public static AjaxResult<Object> success(Object object){
         return new AjaxResult<>(object);
+    }
+
+    public static AjaxResult success(){
+        return new AjaxResult(MsgType.SUCCESS.getCode(),MsgType.SUCCESS.getMessage());
     }
 
     /**

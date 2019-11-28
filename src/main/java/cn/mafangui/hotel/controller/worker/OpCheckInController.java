@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/op/check-in")
-public class CheckInController {
+public class OpCheckInController {
 
     @Autowired
     private CheckInService checkInService;

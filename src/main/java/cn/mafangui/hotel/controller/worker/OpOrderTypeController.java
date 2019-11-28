@@ -13,26 +13,32 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/op/order-type")
-public class OrderTypeController {
+public class OpOrderTypeController {
     @Autowired
     private OrderTypeService orderTypeService;
 
     @RequestMapping(value = "/add")
-    public int addOrderType(String type,String remark){
+    public AjaxResult addOrderType(String type,String remark){
         OrderType orderType = new OrderType(type,remark);
-        return orderTypeService.insertOrderType(orderType);
+        int re = orderTypeService.insertOrderType(orderType);
+        if(re!=1) return ResponseTool.failed();
+        return ResponseTool.success();
     }
 
-    @RequestMapping(value = "/delete")
-    public int deleteOrderType(Integer typeId){
-        return orderTypeService.deleteOrderType(typeId);
+    @RequestMapping(value = "/delete/{typeId}")
+    public AjaxResult deleteOrderType(@PathVariable Integer typeId){
+        int re= orderTypeService.deleteOrderType(typeId);
+        if(re!=1) return ResponseTool.failed();
+        return ResponseTool.success();
     }
 
     @RequestMapping(value = "/update")
-    public int updateOrderType(Integer typeId,String type,String remark){
+    public AjaxResult updateOrderType(Integer typeId,String type,String remark){
         OrderType orderType = new OrderType(type,remark);
         orderType.setTypeId(typeId);
-        return orderTypeService.updateOrderType(orderType);
+        int re = orderTypeService.updateOrderType(orderType);
+        if(re!=1) return ResponseTool.failed();
+        return ResponseTool.success();
     }
 
     @RequestMapping(value = "/{typeId}")
